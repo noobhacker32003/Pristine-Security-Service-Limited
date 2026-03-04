@@ -46,27 +46,28 @@ export default function Navbar() {
                 <div className="flex justify-between items-center">
                     {/* Logo */}
                     <Link href="/" className="flex items-center gap-3">
-                        <div className="relative w-10 h-12 flex-shrink-0">
-                            <Image
-                                src="/assets/logo1.png"
-                                alt="PSSL Shield Logo"
-                                fill
-                                className="object-contain"
-                                priority
-                            />
-                        </div>
-                        <div className="relative h-10 w-32 hidden sm:block">
-                            <Image
-                                src="/assets/logo2.png"
-                                alt="Pristine Security Service Limited"
-                                fill
-                                className="object-contain object-left"
-                                priority
-                            />
-                        </div>
-                        {/* Fallback for very small screens if logo2 is hidden */}
-                        <div className="flex flex-col sm:hidden">
-                            <span className="text-xl font-bold text-slate-900 leading-tight">PSSL</span>
+                        <div className="flex items-center gap-2">
+                            {/* Logo 1 (Shield) - Slightly smaller on mobile, scales up on sm screens */}
+                            <div className="relative w-8 h-10 sm:w-10 sm:h-12 flex-shrink-0">
+                                <Image
+                                    src="/assets/logo1.png"
+                                    alt="PSSL Shield Logo"
+                                    fill
+                                    className="object-contain"
+                                    priority
+                                />
+                            </div>
+
+                            {/* Logo 2 (Text) - Removed 'hidden sm:block'. Now visible on all devices. */}
+                            <div className="relative h-8 w-28 sm:h-10 sm:w-32">
+                                <Image
+                                    src="/assets/logo2.png"
+                                    alt="Pristine Security Service Limited"
+                                    fill
+                                    className="object-contain object-left"
+                                    priority
+                                />
+                            </div>
                         </div>
                     </Link>
 
