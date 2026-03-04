@@ -49,7 +49,7 @@ export default function Home() {
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-r from-blue-900/90 to-slate-900/90 mix-blend-multiply" />
           <img
-            src="/assets/pic1.png"
+            src="https://www.elitebd.com/themes/elite-force-new-06/assets/images/Elite-Force-Guard-Silhouette.jpg"
             alt="Security professionals in a corporate setting"
             className="w-full h-full object-cover opacity-40"
           />
@@ -133,7 +133,7 @@ export default function Home() {
               className="relative rounded-2xl overflow-hidden shadow-2xl h-[500px]"
             >
               <img
-                src="assets/a.png"
+                src="https://tragopan-security.co.uk/wp-content/uploads/2024/11/6.jpg"
                 alt="Security monitoring"
                 className="w-full h-full object-cover"
               />
@@ -203,7 +203,7 @@ export default function Home() {
       </section>
 
       {/* Quick Contact CTA */}
-      <section className="py-20 bg-blue-600 relative overflow-hidden">
+      <section className="py-20 bg-[#1C398E] relative overflow-hidden">
         <div className="absolute top-0 right-0 p-32 opacity-10 blur-3xl pointer-events-none">
           <Shield className="w-96 h-96 text-white" />
         </div>

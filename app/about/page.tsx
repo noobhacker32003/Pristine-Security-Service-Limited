@@ -18,7 +18,7 @@ export default function AboutPage() {
                 <div className="absolute inset-0 z-0">
                     <div className="absolute inset-0 bg-slate-900/90 mix-blend-multiply" />
                     <img
-                        src="https://www.pristinesecurity.org/images/2200.jpg"
+                        src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?q=80&w=2669&auto=format&fit=crop"
                         alt="Security meeting"
                         className="w-full h-full object-cover opacity-30"
                     />
@@ -53,7 +53,7 @@ export default function AboutPage() {
                         className="relative h-[600px] rounded-2xl overflow-hidden shadow-2xl"
                     >
                         <img
-                            src="assets/0002.jpg"
+                            src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=2560&auto=format&fit=crop"
                             alt="Security Guard"
                             className="w-full h-full object-cover"
                         />
