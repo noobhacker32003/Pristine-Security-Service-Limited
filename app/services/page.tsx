@@ -19,47 +19,47 @@ const staggerContainer = {
 
 const servicesList = [
     {
-        icon: <Users className="w-10 h-10 text-blue-600" />,
+        icon: <Users className="w-10 h-10" />,
         title: "Uniformed Guarding",
         description: "Every day approximately 2,000 uniformed Pristine Security Guards, Supervisors, Inspectors and Security Officers perform a variety of duties to help maintain secure environments for a good number of clients across the Country."
     },
     {
-        icon: <MapPin className="w-10 h-10 text-blue-600" />,
+        icon: <MapPin className="w-10 h-10" />,
         title: "Special Event Security",
         description: "Recognized for security services at various types of special events. Employees are trained to deal with issues in high-visibility settings such as Concert Venues, Trade Shows, and Sporting Events. Includes Access Control, Crowd Control, and Executive Protection."
     },
     {
-        icon: <Computer className="w-10 h-10 text-blue-600" />,
+        icon: <Computer className="w-10 h-10" />,
         title: "Console Operations",
         description: "Our console operators monitor CCTV, Access Control, Fire Detection and Intrusion Detection Systems. We also monitor Visitor Arrivals and Departures, and coordinate with Officers on Patrol."
     },
     {
-        icon: <Shield className="w-10 h-10 text-blue-600" />,
+        icon: <Shield className="w-10 h-10" />,
         title: "Physical Protection",
         description: "One of the very few Private Security Service Provider Companies in Bangladesh taking the responsibility of installing Barbed wire, Razor wire, and Electric Fences over existing boundary walls."
     },
     {
-        icon: <Users className="w-10 h-10 text-blue-600" />,
+        icon: <Users className="w-10 h-10" />,
         title: "Reception/Concierge Services",
         description: "Monitoring Access of Employees, Contractors and Visitors to Facilities, issuing Badges, Maintaining Logs, Inspecting Bags and Packages and giving directions."
     },
     {
-        icon: <Building2 className="w-10 h-10 text-blue-600" />,
+        icon: <Building2 className="w-10 h-10" />,
         title: "Building Security",
         description: "Extensive experience providing security for both Commercial and Residential Buildings, offering customized solutions based on security expertise."
     },
     {
-        icon: <GraduationCap className="w-10 h-10 text-blue-600" />,
+        icon: <GraduationCap className="w-10 h-10" />,
         title: "Education Security",
         description: "Providing specialized security to educational institutions in the face of a myriad of unique security threats facing schools and campuses today."
     },
     {
-        icon: <Utensils className="w-10 h-10 text-blue-600" />,
+        icon: <Utensils className="w-10 h-10" />,
         title: "Hospitality Security",
         description: "Pristine Security is committed to the advancement of security and life safety in the Hospitality and Hotel Industry."
     },
     {
-        icon: <Construction className="w-10 h-10 text-blue-600" />,
+        icon: <Construction className="w-10 h-10" />,
         title: "Manufacturing Facilities Security",
         description: "Protecting manufacturing industries from external threats and trusted insiders to prevent loss of profitability, trade secrets, and reputation."
     }
