@@ -15,8 +15,24 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Pristine Security Service Limited",
-  description: "Professional Security Services Company protecting your business and property.",
+  title: {
+    default: "Pristine Security Service Limited | Elite Security Bangladesh",
+    template: "%s | Pristine Security Service Limited",
+  },
+  description: "Pristine Security Service Limited provides elite, professional security solutions in Bangladesh including uniformed guarding, corporate security, event security, and physical protection.",
+  openGraph: {
+    title: "Pristine Security Service Limited",
+    description: "Professional Security Services Company protecting your business and property in Bangladesh.",
+    url: "https://www.pristinesecurity.org",
+    siteName: "Pristine Security Service Limited",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Pristine Security Service Limited",
+    description: "Professional Security Services Company protecting your business and property in Bangladesh.",
+  },
 };
 
 export default function RootLayout({

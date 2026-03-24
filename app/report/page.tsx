@@ -93,7 +93,7 @@ export default function ReportPage() {
                                             id="guardName"
                                             type="text"
                                             {...register('guardName', { required: 'Guard name is required' })}
-                                            className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-all bg-slate-50 focus:bg-white"
+                                            className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-all bg-slate-50 focus:bg-white placeholder-slate-600"
                                             placeholder="Enter guard's name"
                                         />
                                         {errors.guardName && <p className="text-red-500 text-sm mt-1">{errors.guardName.message}</p>}
@@ -105,7 +105,7 @@ export default function ReportPage() {
                                             id="guardId"
                                             type="text"
                                             {...register('guardId', { required: 'Guard ID or location is required' })}
-                                            className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-all bg-slate-50 focus:bg-white"
+                                            className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-all bg-slate-50 focus:bg-white placeholder-slate-600"
                                             placeholder="e.g., PS-1024 or Banani HQ"
                                         />
                                         {errors.guardId && <p className="text-red-500 text-sm mt-1">{errors.guardId.message}</p>}
@@ -118,7 +118,7 @@ export default function ReportPage() {
                                         id="incidentDescription"
                                         rows={6}
                                         {...register('incidentDescription', { required: 'Please describe the incident' })}
-                                        className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-all bg-slate-50 focus:bg-white resize-none"
+                                        className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-all bg-slate-50 focus:bg-white resize-none placeholder-slate-600"
                                         placeholder="Please provide a detailed description of what happened, including date, time, and specific actions."
                                     ></textarea>
                                     {errors.incidentDescription && <p className="text-red-500 text-sm mt-1">{errors.incidentDescription.message}</p>}

@@ -67,32 +67,32 @@ export default function AboutPage() {
                         className="space-y-6"
                     >
                         <h2 className="text-3xl font-bold text-white-900 mb-6">Our History & Legacy</h2>
-                        <p className="text-lg text-slate-600 leading-relaxed">
+                        <p className="text-lg leading-relaxed text-cyan-900 ">
                             Founded by few highly trained officers of World's leading Multinational Security Company in Bangladesh under the supervision of a Retired senior Battle tank technocrats of Bangladesh Army in 2009. Pristine is well-known for its military-like discipline and precision honed to perfection.
                         </p>
-                        <p className="text-lg text-slate-600 leading-relaxed">
+                        <p className="text-lg leading-relaxed text-cyan-900">
                             At Pristine our security experts put into place meticulous planning worked to the last detail. Our processes are seamless with systemic functioning and built-in preventive controls. Moreover, on specific demand by our Client we provide Retired soldiers in place of security guards, who are better trained to deal with demanding emergency situations.
                         </p>
-                        <p className="text-lg text-slate-600 leading-relaxed">
+                        <p className="text-lg leading-relaxed text-cyan-900">
                             The list of customers who hire services from Pristine include Embassies, UN bodies, NGO's, Government Organizations, Banks, Offices, Factories, Industries, Housing and Residences.
                         </p>
 
                         <div className="pt-6 grid grid-cols-2 gap-6">
                             <div className="flex items-center gap-3">
                                 <CheckCircle2 className="text-blue-600 w-6 h-6 shrink-0" />
-                                <span className="font-semibold text-slate-800">Custom-built Systems</span>
+                                <span className="font-2xl text-cyan">Custom-built Systems</span>
                             </div>
                             <div className="flex items-center gap-3">
                                 <CheckCircle2 className="text-blue-600 w-6 h-6 shrink-0" />
-                                <span className="font-semibold text-slate-800">Preventive Controls</span>
+                                <span className="font-2xl text-cyan">Preventive Controls</span>
                             </div>
                             <div className="flex items-center gap-3">
                                 <CheckCircle2 className="text-blue-600 w-6 h-6 shrink-0" />
-                                <span className="font-semibold text-slate-800">Unmatched Synergy</span>
+                                <span className="font-2xl text-cyan">Unmatched Synergy</span>
                             </div>
                             <div className="flex items-center gap-3">
                                 <CheckCircle2 className="text-blue-600 w-6 h-6 shrink-0" />
-                                <span className="font-semibold text-slate-800">Ex-Military Staffing</span>
+                                <span className="font-2xl text-cyan">Ex-Military Staffing</span>
                             </div>
                         </div>
                     </motion.div>

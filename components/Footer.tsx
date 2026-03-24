@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { MapPin, Phone, Mail, Facebook, Twitter, Shield, ShieldCheck } from 'lucide-react';
+import { MapPin, PhoneCall, Mail, Facebook, Twitter, Shield, ShieldCheck } from 'lucide-react';
 
 export default function Footer() {
     const currentYear = new Date().getFullYear();
@@ -91,7 +91,7 @@ export default function Footer() {
                                 <span>Banani Commercial Area,<br />Dhaka, Bangladesh</span>
                             </li>
                             <li className="flex items-center gap-3 text-sm">
-                                <Phone className="w-5 h-5 text-blue-500 shrink-0" />
+                                <PhoneCall className="w-5 h-5 text-blue-500 shrink-0" />
                                 <span>88-02-58817173-4</span>
                             </li>
                             <li className="flex items-center gap-3 text-sm">

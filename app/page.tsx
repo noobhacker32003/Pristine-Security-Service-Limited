@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { ArrowRight, Shield, MapPin, Search, Users, Settings, Building, Briefcase } from 'lucide-react';
+import { ArrowRight, Shield, MapPin, Search, Users, Settings, Building, Briefcase, Badge, Ticket, Cctv, ShieldCheck } from 'lucide-react';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
@@ -20,22 +20,22 @@ const staggerContainer = {
 
 const services = [
   {
-    icon: <Users className="w-8 h-8 text-blue-600" />,
+    icon: <Badge className="w-6 h-6 text-blue-600" />,
     title: 'Uniformed Guarding',
     description: 'Professional security officers ensuring safe environments for our clients nationwide.',
   },
   {
-    icon: <Briefcase className="w-8 h-8 text-blue-600" />,
+    icon: <Ticket className="w-6 h-6 text-blue-600" />,
     title: 'Special Event Security',
     description: 'Efficient staffing for high-visibility venues, concerts, and corporate events.',
   },
   {
-    icon: <Settings className="w-8 h-8 text-blue-600" />,
+    icon: <Cctv className="w-6 h-6 text-blue-600" />,
     title: 'Console Operations',
     description: 'Expert monitoring of CCTV, fire detection, and intrusion detection systems.',
   },
   {
-    icon: <Building className="w-8 h-8 text-blue-600" />,
+    icon: <ShieldCheck className="w-6 h-6 text-blue-600" />,
     title: 'Physical Protection',
     description: 'Installation and maintenance of physical deterrents like razor wires and fences.',
   },

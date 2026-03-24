@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ShieldAlert } from 'lucide-react';
+import { Menu, X, AlertTriangle, ClipboardSignature } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export default function Navbar() {
@@ -96,10 +96,18 @@ export default function Navbar() {
                         ))}
 
                         <Link
-                            href="/report"
-                            className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-5 py-2.5 rounded-full font-medium transition-colors text-sm shadow-sm hover:shadow-md"
+                            href="/get-service"
+                            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-full font-medium transition-all text-sm shadow-sm hover:shadow-md flex items-center gap-2"
                         >
-                            <ShieldAlert className="w-4 h-4" />
+                            <ClipboardSignature className="w-4 h-4" />
+                            Get Service
+                        </Link>
+
+                        <Link
+                            href="/report"
+                            className="flex items-center gap-2 text-slate-500 hover:text-slate-700 hover:bg-slate-50 px-4 py-2 rounded-full font-medium transition-colors text-sm"
+                        >
+                            <AlertTriangle className="w-4 h-4" />
                             Report Incident
                         </Link>
                     </div>
@@ -141,12 +149,19 @@ export default function Navbar() {
                                     {link.name}
                                 </Link>
                             ))}
-                            <div className="pt-4 pb-2 px-3">
+                            <div className="pt-4 pb-2 px-3 flex flex-col gap-3">
+                                <Link
+                                    href="/get-service"
+                                    className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl font-medium transition-colors w-full shadow-sm"
+                                >
+                                    <ClipboardSignature className="w-5 h-5" />
+                                    Get Service
+                                </Link>
                                 <Link
                                     href="/report"
-                                    className="flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white px-5 py-3 rounded-xl font-medium transition-colors w-full shadow-sm"
+                                    className="flex items-center justify-center gap-2 border border-slate-200 text-slate-600 hover:bg-slate-50 px-5 py-3 rounded-xl font-medium transition-colors w-full"
                                 >
-                                    <ShieldAlert className="w-5 h-5" />
+                                    <AlertTriangle className="w-5 h-5" />
                                     Report Incident
                                 </Link>
                             </div>
