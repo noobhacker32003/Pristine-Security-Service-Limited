@@ -1,10 +1,17 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { Search, LogOut, ShieldCheck, ClipboardSignature, AlertTriangle, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
+import { useForm, useFieldArray } from 'react-hook-form';
+import { Search, LogOut, ShieldCheck, ClipboardSignature, AlertTriangle, CheckCircle2, AlertCircle, Loader2, Plus, Trash2, Tag, Medal } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { logoutAdmin } from '@/app/admin/actions';
+
+type OfferFormValues = {
+    title: string;
+    badgeText: string;
+    benefits: { value: string }[];
+};
 
 type ReportType = {
     _id: string;
@@ -35,11 +42,78 @@ export default function AdminDashboardClient({
 }) {
     const [reports, setReports] = useState(initialReports);
     const [serviceRequests, setServiceRequests] = useState(initialServiceRequests);
-    const [activeTab, setActiveTab] = useState<'service' | 'report'>('service');
+    const [activeTab, setActiveTab] = useState<'service' | 'report' | 'offer'>('service');
     const [searchQuery, setSearchQuery] = useState('');
     const [updatingId, setUpdatingId] = useState<string | null>(null);
     const [toastMsg, setToastMsg] = useState<{ type: 'success' | 'error', text: string } | null>(null);
     const router = useRouter();
+
+    const [isOfferLoading, setIsOfferLoading] = useState(false);
+    
+    const { register, control, handleSubmit, reset } = useForm<OfferFormValues>({
+        defaultValues: {
+            title: '',
+            badgeText: '',
+            benefits: [{ value: '' }]
+        }
+    });
+
+    const { fields, append, remove } = useFieldArray({
+        control,
+        name: "benefits"
+    });
+
+    useEffect(() => {
+        if (activeTab === 'offer') {
+            fetchOffer();
+        }
+    }, [activeTab]);
+
+    const fetchOffer = async () => {
+        setIsOfferLoading(true);
+        try {
+            const res = await fetch('/api/offer');
+            if (res.ok) {
+                const data = await res.json();
+                if (data) {
+                    reset({
+                        title: data.title || '',
+                        badgeText: data.badgeText || '',
+                        benefits: data.benefits && data.benefits.length > 0 
+                            ? data.benefits.map((b: string) => ({ value: b }))
+                            : [{ value: '' }]
+                    });
+                }
+            }
+        } catch (e) {
+            console.error(e);
+        } finally {
+            setIsOfferLoading(false);
+        }
+    };
+
+    const onSubmitOffer = async (data: OfferFormValues) => {
+        try {
+            const payload = {
+                title: data.title,
+                badgeText: data.badgeText,
+                benefits: data.benefits.map(b => b.value).filter(b => b.trim() !== '')
+            };
+            const res = await fetch('/api/admin/offer', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            if (res.ok) {
+                showToast('success', 'Offer updated successfully');
+            } else {
+                showToast('error', 'Failed to update offer');
+            }
+        } catch (e) {
+            console.error(e);
+            showToast('error', 'An error occurred');
+        }
+    };
 
     const handleLogout = async () => {
         await logoutAdmin();
@@ -185,6 +259,17 @@ export default function AdminDashboardClient({
                         >
                             <AlertTriangle className="w-4 h-4" />
                             Incident Reports ({reports.length})
+                        </button>
+                        <button
+                            onClick={() => { setActiveTab('offer'); setSearchQuery(''); }}
+                            className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium text-sm transition-all focus:outline-none ${
+                                activeTab === 'offer' 
+                                ? 'bg-amber-50 text-amber-700 shadow-sm border border-amber-100' 
+                                : 'text-slate-600 hover:text-amber-600 hover:bg-slate-50 border border-transparent'
+                            }`}
+                        >
+                            <Tag className="w-4 h-4" />
+                            Manage Offers
                         </button>
                     </div>
 
@@ -353,6 +438,95 @@ export default function AdminDashboardClient({
                                         </tbody>
                                     </table>
                                 </div>
+                            </motion.div>
+                        )}
+
+                        {activeTab === 'offer' && (
+                            <motion.div
+                                key="offer-form"
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -10 }}
+                                transition={{ duration: 0.2 }}
+                                className="p-8 max-w-3xl mx-auto"
+                            >
+                                <div className="mb-8">
+                                    <h2 className="text-2xl font-bold text-slate-800 flex items-center gap-2">
+                                        <Medal className="w-6 h-6 text-amber-500" />
+                                        Edit Active Offer
+                                    </h2>
+                                    <p className="text-slate-500 mt-2 text-sm">Update the promotional offer displayed on the public website.</p>
+                                </div>
+
+                                {isOfferLoading ? (
+                                    <div className="flex justify-center items-center py-20">
+                                        <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
+                                    </div>
+                                ) : (
+                                    <form onSubmit={handleSubmit(onSubmitOffer)} className="space-y-6">
+                                        <div>
+                                            <label className="block text-sm font-semibold text-slate-700 mb-2">Offer Title</label>
+                                            <input
+                                                {...register('title', { required: true })}
+                                                className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                                                placeholder="e.g., Providing 24 Hours Security Service"
+                                            />
+                                        </div>
+
+                                        <div>
+                                            <label className="block text-sm font-semibold text-slate-700 mb-2">Badge Text</label>
+                                            <input
+                                                {...register('badgeText', { required: true })}
+                                                className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                                                placeholder="e.g., SPECIAL OFFER"
+                                            />
+                                        </div>
+
+                                        <div>
+                                            <label className="block text-sm font-semibold text-slate-700 mb-2">Benefits List</label>
+                                            <div className="space-y-3">
+                                                {fields.map((field, index) => (
+                                                    <div key={field.id} className="flex gap-2">
+                                                        <div className="flex-grow relative">
+                                                            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                                                <CheckCircle2 className="h-5 w-5 text-green-500" />
+                                                            </div>
+                                                            <input
+                                                                {...register(`benefits.${index}.value`, { required: true })}
+                                                                className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-green-500"
+                                                                placeholder={`Benefit ${index + 1}`}
+                                                            />
+                                                        </div>
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => remove(index)}
+                                                            className="p-3 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-xl transition-colors focus:outline-none"
+                                                        >
+                                                            <Trash2 className="w-5 h-5" />
+                                                        </button>
+                                                    </div>
+                                                ))}
+                                                
+                                                <button
+                                                    type="button"
+                                                    onClick={() => append({ value: '' })}
+                                                    className="flex items-center gap-2 text-sm font-medium text-blue-600 hover:text-blue-700 mt-2 focus:outline-none"
+                                                >
+                                                    <Plus className="w-4 h-4" /> Add another benefit
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <div className="pt-6 border-t border-slate-100">
+                                            <button
+                                                type="submit"
+                                                className="w-full sm:w-auto px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold transition-all shadow-md hover:shadow-lg focus:outline-none"
+                                            >
+                                                Save Active Offer
+                                            </button>
+                                        </div>
+                                    </form>
+                                )}
                             </motion.div>
                         )}
                     </AnimatePresence>

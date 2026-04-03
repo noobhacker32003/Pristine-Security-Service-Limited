@@ -49,7 +49,7 @@ export default function Home() {
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-r from-blue-900/90 to-slate-900/90 mix-blend-multiply" />
           <img
-            src="https://www.elitebd.com/themes/elite-force-new-06/assets/images/Elite-Force-Guard-Silhouette.jpg"
+            src="/assets/images/Hero/Hero (1).jpeg"
             alt="Security professionals in a corporate setting"
             className="w-full h-full object-cover opacity-40"
           />
@@ -133,7 +133,7 @@ export default function Home() {
               className="relative rounded-2xl overflow-hidden shadow-2xl h-[500px]"
             >
               <img
-                src="https://tragopan-security.co.uk/wp-content/uploads/2024/11/6.jpg"
+                src="/assets/images/Hero/Hero (3).jpeg"
                 alt="Security monitoring"
                 className="w-full h-full object-cover"
               />

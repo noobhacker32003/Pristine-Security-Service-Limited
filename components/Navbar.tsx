@@ -26,10 +26,11 @@ export default function Navbar() {
         setIsOpen(false);
     }, [pathname]);
 
-    const navLinks = [
+    const navLinks: { name: string; path: string; badge?: string }[] = [
         { name: 'Home', path: '/' },
         { name: 'About Us', path: '/about' },
         { name: 'Services', path: '/services' },
+        { name: 'Offer', path: '/offer', badge: 'Promo' },
         { name: 'Contact Us', path: '/contact' },
     ];
 
@@ -78,11 +79,16 @@ export default function Navbar() {
                                 key={link.name}
                                 href={link.path}
                                 className={cn(
-                                    'text-sm font-medium transition-colors hover:text-blue-600 relative group',
-                                    pathname === link.path ? 'text-blue-600' : 'text-slate-600'
+                                    'text-sm font-medium transition-colors relative group flex items-center gap-1.5',
+                                    pathname === link.path ? 'text-blue-600' : (link.badge ? 'text-amber-600 font-bold hover:text-amber-500' : 'text-slate-600 hover:text-blue-600')
                                 )}
                             >
                                 {link.name}
+                                {link.badge && (
+                                    <span className="bg-amber-500 text-white text-[10px] uppercase font-bold px-1.5 py-0.5 rounded-sm tracking-wider whitespace-nowrap">
+                                        {link.badge}
+                                    </span>
+                                )}
                                 {pathname === link.path && (
                                     <motion.div
                                         layoutId="navbar-indicator"
@@ -140,13 +146,18 @@ export default function Navbar() {
                                     key={link.name}
                                     href={link.path}
                                     className={cn(
-                                        'block px-3 py-3 rounded-md text-base font-medium transition-colors',
+                                        'px-3 py-3 rounded-md text-base font-medium transition-colors flex items-center justify-between',
                                         pathname === link.path
                                             ? 'bg-blue-50 text-blue-700'
-                                            : 'text-slate-700 hover:bg-slate-50 hover:text-slate-900'
+                                            : (link.badge ? 'text-amber-600 hover:bg-amber-50 font-bold' : 'text-slate-700 hover:bg-slate-50 hover:text-slate-900')
                                     )}
                                 >
-                                    {link.name}
+                                    <span>{link.name}</span>
+                                    {link.badge && (
+                                        <span className="bg-amber-500 text-white text-[10px] uppercase font-bold px-2 py-1 rounded-sm tracking-wider">
+                                            {link.badge}
+                                        </span>
+                                    )}
                                 </Link>
                             ))}
                             <div className="pt-4 pb-2 px-3 flex flex-col gap-3">
