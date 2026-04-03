@@ -30,3 +30,26 @@ export async function POST(request: Request) {
         return NextResponse.json({ error: "Failed to save offer" }, { status: 500 });
     }
 }
+
+export async function DELETE(request: Request) {
+    try {
+        await connectDB();
+        // Since there is only one active offer logic in the initial requirement, 
+        // we can just delete all offers or specific one if ID is provided.
+        // Let's support deleting all active offers if no ID is provided safely.
+        const { searchParams } = new URL(request.url);
+        const id = searchParams.get('id');
+
+        if (id) {
+            await Offer.findByIdAndDelete(id);
+        } else {
+            // Delete the active offer
+            await Offer.deleteMany({ isActive: true });
+        }
+        
+        return NextResponse.json({ success: true }, { status: 200 });
+    } catch (error) {
+        console.error("Error deleting offer:", error);
+        return NextResponse.json({ error: "Failed to delete offer" }, { status: 500 });
+    }
+}

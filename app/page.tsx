@@ -41,6 +41,17 @@ const services = [
   },
 ];
 
+const clients = [
+  { id: 1, name: "Bangladesh Cricket Board", logo: "/assets/client/Bangladesh-Team-Cricket-Logo.webp" },
+  { id: 2, name: "Dutch Bangla Bank", logo: "/assets/client/Dutch-bangla-bank-ltd.svg.png" },
+  { id: 3, name: "BRAC Bank", logo: "/assets/client/brac_bank.jpg" },
+  { id: 4, name: "Channel I", logo: "/assets/client/channel-i-logo-F9F1100F83-seeklogo.com.png" },
+  { id: 5, name: "Client Logo 1", logo: "/assets/client/logo (1).png" },
+  { id: 6, name: "Client Logo 2", logo: "/assets/client/logo.png" },
+  { id: 7, name: "New Project", logo: "/assets/client/new_project_0.png" },
+  { id: 8, name: "Shahjalal Islami Bank", logo: "/assets/client/shahjalal_1.jpg" },
+];
+
 export default function Home() {
   return (
     <div className="flex flex-col w-full">
@@ -198,6 +209,39 @@ export default function Home() {
             >
               View All Services
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Valuable Clients Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="text-center mb-16"
+          >
+            <h2 className="text-blue-600 font-bold tracking-wide uppercase mb-3">Trusted By</h2>
+            <h3 className="text-3xl md:text-4xl font-bold text-slate-900">Our Valuable Clients</h3>
+          </motion.div>
+
+          <div className="flex flex-wrap justify-center items-center gap-10 md:gap-20">
+            {clients.map((client) => (
+              <motion.div
+                key={client.id}
+                whileHover={{ scale: 1.05 }}
+                className="transition-all duration-300 cursor-pointer"
+              >
+                {/* Note: Update the exact src path whenever you upload real logos to your public folder */}
+                <img
+                  src={client.logo}
+                  alt={client.name}
+                  className="h-16 md:h-20 w-auto object-contain rounded-xl transition-shadow"
+                />
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>

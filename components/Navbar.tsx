@@ -26,11 +26,12 @@ export default function Navbar() {
         setIsOpen(false);
     }, [pathname]);
 
-    const navLinks: { name: string; path: string; badge?: string }[] = [
+    const navLinks: { name: string; path: string; badge?: string; badgeColor?: string }[] = [
         { name: 'Home', path: '/' },
         { name: 'About Us', path: '/about' },
         { name: 'Services', path: '/services' },
-        { name: 'Offer', path: '/offer', badge: 'Promo' },
+        { name: 'Offer', path: '/offer', badge: 'Promo', badgeColor: 'bg-amber-500' },
+        { name: 'Get Job', path: '/get-job', badge: 'Hiring', badgeColor: 'bg-green-500' },
         { name: 'Contact Us', path: '/contact' },
     ];
 
@@ -80,12 +81,14 @@ export default function Navbar() {
                                 href={link.path}
                                 className={cn(
                                     'text-sm font-medium transition-colors relative group flex items-center gap-1.5',
-                                    pathname === link.path ? 'text-blue-600' : (link.badge ? 'text-amber-600 font-bold hover:text-amber-500' : 'text-slate-600 hover:text-blue-600')
+                                    pathname === link.path ? 'text-blue-600' : (link.badge ? 'font-bold hover:opacity-80' : 'text-slate-600 hover:text-blue-600'),
+                                    link.badge && link.name === 'Offer' ? 'text-amber-600' : '',
+                                    link.badge && link.name === 'Get Job' ? 'text-green-600' : ''
                                 )}
                             >
                                 {link.name}
                                 {link.badge && (
-                                    <span className="bg-amber-500 text-white text-[10px] uppercase font-bold px-1.5 py-0.5 rounded-sm tracking-wider whitespace-nowrap">
+                                    <span className={cn("text-white text-[10px] uppercase font-bold px-1.5 py-0.5 rounded-sm tracking-wider whitespace-nowrap", link.badgeColor || 'bg-amber-500')}>
                                         {link.badge}
                                     </span>
                                 )}
@@ -149,12 +152,14 @@ export default function Navbar() {
                                         'px-3 py-3 rounded-md text-base font-medium transition-colors flex items-center justify-between',
                                         pathname === link.path
                                             ? 'bg-blue-50 text-blue-700'
-                                            : (link.badge ? 'text-amber-600 hover:bg-amber-50 font-bold' : 'text-slate-700 hover:bg-slate-50 hover:text-slate-900')
+                                            : (link.badge ? 'hover:bg-slate-50 font-bold' : 'text-slate-700 hover:bg-slate-50 hover:text-slate-900'),
+                                        link.badge && link.name === 'Offer' ? 'text-amber-600' : '',
+                                        link.badge && link.name === 'Get Job' ? 'text-green-600' : ''
                                     )}
                                 >
                                     <span>{link.name}</span>
                                     {link.badge && (
-                                        <span className="bg-amber-500 text-white text-[10px] uppercase font-bold px-2 py-1 rounded-sm tracking-wider">
+                                        <span className={cn("text-white text-[10px] uppercase font-bold px-2 py-1 rounded-sm tracking-wider", link.badgeColor || 'bg-amber-500')}>
                                             {link.badge}
                                         </span>
                                     )}

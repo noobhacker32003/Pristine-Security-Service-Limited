@@ -25,8 +25,10 @@ const servicesList = [
     },
     {
         icon: <Ticket className="w-6 h-6" />,
-        title: "Special Event Security",
-        description: "Recognized for security services at various types of special events. Employees are trained to deal with issues in high-visibility settings such as Concert Venues, Trade Shows, and Sporting Events. Includes Access Control, Crowd Control, and Executive Protection."
+        title: "Entertainment Security",
+        description: "Comprehensive security services for TV companies, theme parks, sports events, corporate events, and other entertainment venues.",
+        category: ["events", "media", "venues"],
+        tags: ["event security", "crowd management", "VIP protection"]
     },
     {
         icon: <Cctv className="w-6 h-6" />,
@@ -46,22 +48,37 @@ const servicesList = [
     {
         icon: <Building2 className="w-6 h-6" />,
         title: "Building Security",
-        description: "Extensive experience providing security for both Commercial and Residential Buildings, offering customized solutions based on security expertise."
+        description: "Pristine Security Service has experience in providing security for commercial and residential buildings.",
+        category: ["commercial", "residential"],
+        tags: ["guards", "property protection", "access control"]
     },
     {
         icon: <GraduationCap className="w-6 h-6" />,
-        title: "Education Security",
-        description: "Providing specialized security to educational institutions in the face of a myriad of unique security threats facing schools and campuses today."
+        title: "Educational Institutions Security",
+        description: "Security solutions for educational institutions addressing a wide range of unique and evolving security threats.",
+        category: ["schools", "colleges", "universities"],
+        tags: ["student safety", "campus security", "risk management"]
     },
     {
         icon: <Utensils className="w-6 h-6" />,
         title: "Hospitality Security",
-        description: "Pristine Security is committed to the advancement of security and life safety in the Hospitality and Hotel Industry."
+        description: "Focused on enhancing security and life safety standards within the hospitality and hotel industry.",
+        category: ["hotels", "resorts"],
+        tags: ["guest safety", "asset protection", "24/7 monitoring"]
     },
     {
         icon: <Factory className="w-6 h-6" />,
         title: "Manufacturing Facilities Security",
-        description: "Protecting manufacturing industries from external threats and trusted insiders to prevent loss of profitability, trade secrets, and reputation."
+        description: "Security solutions for manufacturing industries to prevent losses caused by external threats and insider risks.",
+        category: ["factories", "industries"],
+        tags: ["industrial security", "loss prevention", "risk control"]
+    },
+    {
+        icon: <MapPin className="w-6 h-6" />,
+        title: "Community Security",
+        description: "Security services for public agencies such as municipalities, city councils, national government authorities, and international organizations.",
+        category: ["government", "public sector"],
+        tags: ["public safety", "crowd control", "surveillance"]
     }
 ];
 
@@ -84,7 +101,7 @@ export default function ServicesPage() {
                         transition={{ delay: 0.1 }}
                         className="text-xl text-blue-100 max-w-3xl mx-auto"
                     >
-                        Physical Security is our core business and we are uniquely positioned to offer customized security services to meet the specific needs of any organization.
+                        Pristine provides security services to various kinds of businesses and industries. We help identify security issues and deliver customized solutions based on extensive nationwide experience across multiple client categories.
                     </motion.p>
                 </div>
             </section>
@@ -113,9 +130,19 @@ export default function ServicesPage() {
                                 {service.title}
                             </h3>
 
-                            <p className="text-slate-600 leading-relaxed">
+                            <p className={`text-slate-600 leading-relaxed ${service.tags ? 'mb-4' : ''}`}>
                                 {service.description}
                             </p>
+
+                            {service.tags && (
+                                <div className="mt-auto pt-4 flex flex-wrap gap-2">
+                                    {(service.tags as string[]).map((tag, i) => (
+                                        <span key={i} className="px-2.5 py-1 bg-slate-100 text-slate-600 rounded-lg text-xs font-medium">
+                                            {tag}
+                                        </span>
+                                    ))}
+                                </div>
+                            )}
                         </motion.div>
                     ))}
                 </motion.div>

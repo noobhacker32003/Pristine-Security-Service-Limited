@@ -14,11 +14,11 @@ export default function AboutPage() {
     return (
         <div className="pt-10 pb-20">
             {/* Header */}
-            <section className="bg-slate-900 py-20 text-center relative overflow-hidden">
+            <section className="bg-slate-900 min-h-[calc(50vh+200px)] md:min-h-[calc(60vh+200px)] py-20 flex flex-col justify-center text-center relative overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <div className="absolute inset-0 bg-slate-900/90 mix-blend-multiply" />
                     <img
-                        src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?q=80&w=2669&auto=format&fit=crop"
+                        src="/assets/images/about.jpeg"
                         alt="Security meeting"
                         className="w-full h-full object-cover opacity-30"
                     />
@@ -53,7 +53,7 @@ export default function AboutPage() {
                         className="relative h-[600px] rounded-2xl overflow-hidden shadow-2xl"
                     >
                         <img
-                            src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=2560&auto=format&fit=crop"
+                            src="/assets/images/legacy.jpeg"
                             alt="Security Guard"
                             className="w-full h-full object-cover"
                         />
@@ -67,14 +67,23 @@ export default function AboutPage() {
                         className="space-y-6"
                     >
                         <h2 className="text-3xl font-bold text-white-900 mb-6">Our History & Legacy</h2>
-                        <p className="text-lg leading-relaxed text-cyan-900 ">
-                            Founded by few highly trained officers of World's leading Multinational Security Company in Bangladesh under the supervision of a Retired senior Battle tank technocrats of Bangladesh Army in 2009. Pristine is well-known for its military-like discipline and precision honed to perfection.
+                        <p className="text-lg leading-relaxed text-white-500 ">
+                            Pristine Security Service Limited is founded by few highly trained officers of World’s leading Multinational Security Company in Bangladesh under the supervision of a Retired Senior Battle Tank Technocrat of Bangladesh Army in 2009. Pristine is well-known for its military like discipline and precision honed to perfection.
+
+
+
+
+
+
                         </p>
-                        <p className="text-lg leading-relaxed text-cyan-900">
-                            At Pristine our security experts put into place meticulous planning worked to the last detail. Our processes are seamless with systemic functioning and built-in preventive controls. Moreover, on specific demand by our Client we provide Retired soldiers in place of security guards, who are better trained to deal with demanding emergency situations.
+                        <p className="text-lg leading-relaxed text-white-500">
+                            At Pristine, our security experts put into place meticulous planning worked to the last detail. Our processes are seamless with systemic functioning and built-in preventive controls. Moreover, on specific demand by our client we provide Retired Soldiers in place of security guards, who are better trained to deal with demanding emergency situations.
                         </p>
-                        <p className="text-lg leading-relaxed text-cyan-900">
-                            The list of customers who hire services from Pristine include Embassies, UN bodies, NGO's, Government Organizations, Banks, Offices, Factories, Industries, Housing and Residences.
+                        <p className="text-lg leading-relaxed text-white-500">
+                            As a salient feature, our offerings are custom-built, integrated security systems to cater every specific need of the end user. At Pristine, we constantly endeavor to innovate, integrate and deliver. Along with security expertise, we bring unmatched integrity and synergy, yielding greater return on investment of our clients.
+                        </p>
+                        <p className="text-lg leading-relaxed text-white-500">
+                            The list of customers who hire services from Pristine include Embassies, UN bodies, NGO’s, Government Organizations, Banks, Offices, Factories, Industries, Housing and Residences, Super Mole, Fashion & Batik House.
                         </p>
 
                         <div className="pt-6 grid grid-cols-2 gap-6">
@@ -114,7 +123,9 @@ export default function AboutPage() {
                             </div>
                             <h3 className="text-2xl font-bold text-slate-900 mb-4">Our Vision</h3>
                             <p className="text-slate-600 leading-relaxed">
-                                To become one of the Top level Security Service and Allied Services provider at the National level with Quality in people, training and services. It is through this vision that it will build long-term business relationships with its current clients and those who select it in the future as a security partner.
+                                To become one of the Top Level Security Service and Allied Services Provider at the national level with quality in people, training and services.
+
+                                It is through this vision that it will build long-term business relationship with its current clients and those who will select it in the future as security partner.
                             </p>
                         </motion.div>
 
@@ -130,7 +141,7 @@ export default function AboutPage() {
                             </div>
                             <h3 className="text-2xl font-bold text-slate-900 mb-4">Our Mission</h3>
                             <p className="text-slate-600 leading-relaxed">
-                                To foresee, design and deliver comprehensive security solutions to our valued clients throughout Bangladesh. At Pristine we constantly endeavor to innovate, integrate and deliver, yielding greater return on investment for our clients.
+                                To foresee, design and deliver comprehensive security solutions to our valued clients throughout Bangladesh.
                             </p>
                         </motion.div>
 
@@ -146,11 +157,11 @@ export default function AboutPage() {
                             </div>
                             <h3 className="text-2xl font-bold text-slate-900 mb-4">Our Values</h3>
                             <p className="text-slate-600 leading-relaxed text-left border-l-4 border-blue-600 pl-4">
-                                <span className="block mb-2 font-medium">Dedication & Honesty</span>
-                                <span className="block mb-2 font-medium">Reliability & Alertness</span>
                                 <span className="block mb-2 font-medium">Professional Excellence</span>
                                 <span className="block mb-2 font-medium">Discretion & Integrity</span>
-                                <span className="block font-medium">Client Confidentiality</span>
+                                <span className="block mb-2 font-medium">Client Confidentiality</span>
+                                <span className="block mb-2 font-medium">Trust & Satisfaction of the Client</span>
+                                <span className="block font-medium">Employee Satisfaction</span>
                             </p>
                         </motion.div>
                     </div>
