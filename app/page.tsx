@@ -1,8 +1,10 @@
 "use client";
 
 import { motion } from 'framer-motion';
+import { useState, ReactNode } from 'react';
 import Link from 'next/link';
 import { ArrowRight, Shield, MapPin, Search, Users, Settings, Building, Briefcase, Badge, Ticket, Cctv, ShieldCheck } from 'lucide-react';
+
 
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
@@ -18,28 +20,58 @@ const staggerContainer = {
   }
 };
 
+// Shows image from URL; falls back to icon placeholder on error
+function ServiceImage({ src, title, icon }: { src: string; title: string; icon: ReactNode }) {
+  const [failed, setFailed] = useState(false);
+
+  if (failed) {
+    return (
+      <div className="w-full h-44 bg-blue-50 flex items-center justify-center text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+        {icon}
+      </div>
+    );
+  }
+
+  return (
+    <div className="w-full h-44 overflow-hidden bg-slate-100">
+      <img
+        src={src}
+        alt={title}
+        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+        onError={() => setFailed(true)}
+      />
+    </div>
+  );
+}
+
+
 const services = [
   {
     icon: <Badge className="w-6 h-6 text-blue-600" />,
     title: 'Uniformed Guarding',
+    image: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=800&q=80',
     description: 'Professional security officers ensuring safe environments for our clients nationwide.',
   },
   {
     icon: <Ticket className="w-6 h-6 text-blue-600" />,
     title: 'Special Event Security',
+    image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80',
     description: 'Efficient staffing for high-visibility venues, concerts, and corporate events.',
   },
   {
     icon: <Cctv className="w-6 h-6 text-blue-600" />,
     title: 'Console Operations',
+    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
     description: 'Expert monitoring of CCTV, fire detection, and intrusion detection systems.',
   },
   {
     icon: <ShieldCheck className="w-6 h-6 text-blue-600" />,
     title: 'Physical Protection',
+    image: 'https://images.unsplash.com/photo-1588776814546-1ffedbe47426?w=800&q=80',
     description: 'Installation and maintenance of physical deterrents like razor wires and fences.',
   },
 ];
+
 
 const clients = [
   { id: 1, name: "Bangladesh Cricket Board", logo: "/assets/client/Bangladesh-Team-Cricket-Logo.webp" },
@@ -189,17 +221,18 @@ export default function Home() {
               <motion.div
                 key={index}
                 variants={fadeInUp}
-                className="bg-white rounded-2xl p-8 shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all group"
+                className="bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all group overflow-hidden flex flex-col"
               >
-                <div className="w-16 h-16 bg-blue-50 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                  {service.icon}
+                <ServiceImage src={service.image} title={service.title} icon={service.icon} />
+                <div className="p-8 flex flex-col flex-1">
+                  <h4 className="text-xl font-bold text-slate-900 mb-4">{service.title}</h4>
+                  <p className="text-slate-600 leading-relaxed mb-6">
+                    {service.description}
+                  </p>
                 </div>
-                <h4 className="text-xl font-bold text-slate-900 mb-4">{service.title}</h4>
-                <p className="text-slate-600 leading-relaxed mb-6">
-                  {service.description}
-                </p>
               </motion.div>
             ))}
+
           </motion.div>
 
           <div className="mt-12 text-center">

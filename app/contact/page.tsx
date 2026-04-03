@@ -3,7 +3,9 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
-import { MapPin, Phone, Mail, Send, Loader2, CheckCircle2 } from 'lucide-react';
+import { MapPin, Phone, Mail, Send, Loader2, CheckCircle2, Globe } from 'lucide-react';
+
+// ... (Will use multi_replace_file_content for multiple places instead)
 
 type ContactFormData = {
     name: string;
@@ -134,60 +136,111 @@ export default function ContactPage() {
                     </div>
 
                     {/* Right Column: Info & Map */}
-                    <div className="bg-slate-900 text-white p-10 lg:p-14 flex flex-col justify-between relative overflow-hidden">
+                    <div className="bg-slate-900 text-white p-8 lg:p-12 flex flex-col relative overflow-hidden h-full">
                         <div className="absolute top-0 right-0 p-10 opacity-5 pointer-events-none">
                             <Mail className="w-64 h-64" />
                         </div>
 
-                        <div className="relative z-10">
-                            <h2 className="text-2xl font-bold mb-8">Contact Information</h2>
+                        <div className="relative z-10 flex-1 flex flex-col h-full">
+                            <div className="mb-8">
+                                <h2 className="text-2xl font-bold mb-4">Our Offices</h2>
+                                <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8 text-slate-300 text-sm">
+                                    <a href="mailto:info@pristinesecurity.org" className="flex items-center gap-2 hover:text-white transition-colors">
+                                        <Mail className="w-4 h-4 text-blue-400" />
+                                        info@pristinesecurity.org
+                                    </a>
+                                    <a href="https://www.pristinesecurity.org" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-white transition-colors">
+                                        <Globe className="w-4 h-4 text-blue-400" />
+                                        www.pristinesecurity.org
+                                    </a>
+                                </div>
+                            </div>
 
-                            <div className="space-y-6 mb-10">
-                                <div className="flex items-start gap-4">
-                                    <div className="w-12 h-12 bg-blue-600/20 rounded-xl flex items-center justify-center shrink-0">
-                                        <MapPin className="w-6 h-6 text-blue-400" />
+                            <div className="flex-1 overflow-y-auto pr-2 pb-4 space-y-10 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-transparent">
+                                {/* Head Office */}
+                                <div>
+                                    <h3 className="text-xl font-bold mb-5 text-blue-400 border-b border-slate-700 pb-2">Head Office</h3>
+                                    <div className="space-y-4 mb-6">
+                                        <div className="flex items-start gap-3 text-sm">
+                                            <div className="w-8 h-8 bg-blue-600/20 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
+                                                <MapPin className="w-4 h-4 text-blue-400" />
+                                            </div>
+                                            <div>
+                                                <p className="text-slate-300 leading-relaxed">House No: 136/B, Road No: 22,<br />Mohakhali New D.O.H.S,<br />Dhaka:1206, Bangladesh.</p>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-start gap-3 text-sm flex-wrap sm:flex-nowrap">
+                                            <div className="w-8 h-8 bg-blue-600/20 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
+                                                <Phone className="w-4 h-4 text-blue-400" />
+                                            </div>
+                                            <div className="flex gap-x-6 gap-y-2 flex-wrap">
+                                                <div>
+                                                    <span className="block text-slate-400 text-xs uppercase tracking-wider mb-0.5">Control Room</span>
+                                                    <span className="text-slate-200">02-58817173-4</span>
+                                                </div>
+                                                <div>
+                                                    <span className="block text-slate-400 text-xs uppercase tracking-wider mb-0.5">Hotline</span>
+                                                    <span className="text-slate-200">+880-17-55-62-15-78</span>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <h4 className="font-semibold text-lg">Office Address</h4>
-                                        <p className="text-slate-300 mt-1">Banani Commercial Area,<br />Dhaka, Bangladesh</p>
+                                    {/* Google Maps Iframe */}
+                                    <div className="w-full h-[200px] rounded-xl overflow-hidden shadow-lg border border-slate-700">
+                                        <iframe
+                                            src="https://maps.google.com/maps?q=House%20No%3A%20136%2FB%2C%20Road%20No%3A%2022%2C%20Mohakhali%20New%20D.O.H.S%2C%20Dhaka%3A1206&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                                            width="100%"
+                                            height="100%"
+                                            style={{ border: 0 }}
+                                            allowFullScreen={true}
+                                            loading="lazy"
+                                            referrerPolicy="no-referrer-when-downgrade"
+                                        ></iframe>
                                     </div>
                                 </div>
 
-                                <div className="flex items-start gap-4">
-                                    <div className="w-12 h-12 bg-blue-600/20 rounded-xl flex items-center justify-center shrink-0">
-                                        <Phone className="w-6 h-6 text-blue-400" />
+                                {/* Chittagong Office */}
+                                <div>
+                                    <h3 className="text-xl font-bold mb-5 text-blue-400 border-b border-slate-700 pb-2">Chittagong Office</h3>
+                                    <div className="space-y-4 mb-6">
+                                        <div className="flex items-start gap-3 text-sm">
+                                            <div className="w-8 h-8 bg-blue-600/20 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
+                                                <MapPin className="w-4 h-4 text-blue-400" />
+                                            </div>
+                                            <div>
+                                                <p className="text-slate-300 leading-relaxed">Madina Market 3rd Floor,<br />6 Muradpur, Panchlish,<br />Chittagong.</p>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-start gap-3 text-sm flex-wrap sm:flex-nowrap">
+                                            <div className="w-8 h-8 bg-blue-600/20 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
+                                                <Phone className="w-4 h-4 text-blue-400" />
+                                            </div>
+                                            <div className="flex gap-x-6 gap-y-2 flex-wrap">
+                                                <div>
+                                                    <span className="block text-slate-400 text-xs uppercase tracking-wider mb-0.5">Control Room</span>
+                                                    <span className="text-slate-200">+031-658660</span>
+                                                </div>
+                                                <div>
+                                                    <span className="block text-slate-400 text-xs uppercase tracking-wider mb-0.5">Hotline</span>
+                                                    <span className="text-slate-200">880-17-55-69-44-99</span>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <h4 className="font-semibold text-lg">Phone Number</h4>
-                                        <p className="text-slate-300 mt-1">88-02-58817173-4</p>
-                                    </div>
-                                </div>
-
-                                <div className="flex items-start gap-4">
-                                    <div className="w-12 h-12 bg-blue-600/20 rounded-xl flex items-center justify-center shrink-0">
-                                        <Mail className="w-6 h-6 text-blue-400" />
-                                    </div>
-                                    <div>
-                                        <h4 className="font-semibold text-lg">Email Address</h4>
-                                        <a href="mailto:info@pristinesecurity.org" className="text-slate-300 mt-1 hover:text-white transition-colors">
-                                            info@pristinesecurity.org
-                                        </a>
+                                    {/* Google Maps Iframe */}
+                                    <div className="w-full h-[200px] rounded-xl overflow-hidden shadow-lg border border-slate-700">
+                                        <iframe
+                                            src="https://maps.google.com/maps?q=Madina%20Market%2C%20Muradpur%2C%20Panchlaish%2C%20Chittagong&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                                            width="100%"
+                                            height="100%"
+                                            style={{ border: 0 }}
+                                            allowFullScreen={true}
+                                            loading="lazy"
+                                            referrerPolicy="no-referrer-when-downgrade"
+                                        ></iframe>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        {/* Google Maps Iframe */}
-                        <div className="relative z-10 w-full h-[300px] rounded-xl overflow-hidden shadow-lg border border-slate-700">
-                            <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14602.70031174628!2d90.40224151737754!3d23.79461159999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c70c15ea1de1%3A0x9720d10e82400508!2sBanani%2C%20Dhaka!5e0!3m2!1sen!2sbd!4v1715012345678!5m2!1sen!2sbd"
-                                width="100%"
-                                height="100%"
-                                style={{ border: 0 }}
-                                allowFullScreen={true}
-                                loading="lazy"
-                                referrerPolicy="no-referrer-when-downgrade"
-                            ></iframe>
                         </div>
                     </div>
                 </div>

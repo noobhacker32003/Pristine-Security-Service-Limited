@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from 'framer-motion';
-import { Shield, Users, Computer, Building2, MapPin, GraduationCap, Utensils, Construction, CheckCircle2, Ticket, Cctv, ShieldCheck, Factory, Badge } from 'lucide-react';
+import { useState, ReactNode } from 'react';
+import { Shield, Users, Building2, MapPin, GraduationCap, Utensils, CheckCircle2, Ticket, Cctv, ShieldCheck, Factory, Badge } from 'lucide-react';
 
 const fadeInUp = {
     initial: { opacity: 0, y: 30 },
@@ -17,15 +18,44 @@ const staggerContainer = {
     }
 };
 
+// Shows image from URL; falls back to icon placeholder on error
+function ServiceImage({ src, title, icon }: { src: string; title: string; icon: ReactNode }) {
+    const [failed, setFailed] = useState(false);
+
+    if (failed) {
+        return (
+            <div className="w-full h-48 bg-blue-50 flex items-center justify-center text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+                <div className="flex flex-col items-center gap-2 opacity-60">
+                    <div className="w-14 h-14">{icon}</div>
+                </div>
+            </div>
+        );
+    }
+
+    return (
+        <div className="w-full h-48 overflow-hidden bg-slate-100">
+            <img
+                src={src}
+                alt={title}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                onError={() => setFailed(true)}
+            />
+        </div>
+    );
+}
+
+
 const servicesList = [
     {
         icon: <Badge className="w-6 h-6" />,
         title: "Uniformed Guarding",
+        image: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=800&q=80",
         description: "Every day approximately 2,000 uniformed Pristine Security Guards, Supervisors, Inspectors and Security Officers perform a variety of duties to help maintain secure environments for a good number of clients across the Country."
     },
     {
         icon: <Ticket className="w-6 h-6" />,
         title: "Entertainment Security",
+        image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80",
         description: "Comprehensive security services for TV companies, theme parks, sports events, corporate events, and other entertainment venues.",
         category: ["events", "media", "venues"],
         tags: ["event security", "crowd management", "VIP protection"]
@@ -33,21 +63,25 @@ const servicesList = [
     {
         icon: <Cctv className="w-6 h-6" />,
         title: "Console Operations",
+        image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
         description: "Our console operators monitor CCTV, Access Control, Fire Detection and Intrusion Detection Systems. We also monitor Visitor Arrivals and Departures, and coordinate with Officers on Patrol."
     },
     {
         icon: <ShieldCheck className="w-6 h-6" />,
         title: "Physical Protection",
+        image: "https://images.unsplash.com/photo-1588776814546-1ffedbe47426?w=800&q=80",
         description: "One of the very few Private Security Service Provider Companies in Bangladesh taking the responsibility of installing Barbed wire, Razor wire, and Electric Fences over existing boundary walls."
     },
     {
         icon: <Users className="w-6 h-6" />,
         title: "Reception/Concierge Services",
+        image: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&q=80",
         description: "Monitoring Access of Employees, Contractors and Visitors to Facilities, issuing Badges, Maintaining Logs, Inspecting Bags and Packages and giving directions."
     },
     {
         icon: <Building2 className="w-6 h-6" />,
         title: "Building Security",
+        image: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80",
         description: "Pristine Security Service has experience in providing security for commercial and residential buildings.",
         category: ["commercial", "residential"],
         tags: ["guards", "property protection", "access control"]
@@ -55,6 +89,7 @@ const servicesList = [
     {
         icon: <GraduationCap className="w-6 h-6" />,
         title: "Educational Institutions Security",
+        image: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&q=80",
         description: "Security solutions for educational institutions addressing a wide range of unique and evolving security threats.",
         category: ["schools", "colleges", "universities"],
         tags: ["student safety", "campus security", "risk management"]
@@ -62,6 +97,7 @@ const servicesList = [
     {
         icon: <Utensils className="w-6 h-6" />,
         title: "Hospitality Security",
+        image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80",
         description: "Focused on enhancing security and life safety standards within the hospitality and hotel industry.",
         category: ["hotels", "resorts"],
         tags: ["guest safety", "asset protection", "24/7 monitoring"]
@@ -69,6 +105,7 @@ const servicesList = [
     {
         icon: <Factory className="w-6 h-6" />,
         title: "Manufacturing Facilities Security",
+        image: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80",
         description: "Security solutions for manufacturing industries to prevent losses caused by external threats and insider risks.",
         category: ["factories", "industries"],
         tags: ["industrial security", "loss prevention", "risk control"]
@@ -76,6 +113,7 @@ const servicesList = [
     {
         icon: <MapPin className="w-6 h-6" />,
         title: "Community Security",
+        image: "https://images.unsplash.com/photo-1577495508048-b635879837f1?w=800&q=80",
         description: "Security services for public agencies such as municipalities, city councils, national government authorities, and international organizations.",
         category: ["government", "public sector"],
         tags: ["public safety", "crowd control", "surveillance"]
@@ -118,31 +156,34 @@ export default function ServicesPage() {
                         <motion.div
                             key={index}
                             variants={fadeInUp}
-                            className="bg-white rounded-2xl p-8 shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 relative group overflow-hidden"
+                            className="bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 relative group overflow-hidden flex flex-col"
                         >
-                            <div className="absolute top-0 left-0 w-full h-1 bg-blue-600 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
+                            {/* Top accent bar */}
+                            <div className="absolute top-0 left-0 w-full h-1 bg-blue-600 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 z-10" />
 
-                            <div className="w-20 h-20 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
-                                {service.icon}
+                            {/* Service Image */}
+                            <ServiceImage src={service.image} title={service.title} icon={service.icon} />
+
+                            {/* Card Body */}
+                            <div className="p-8 flex flex-col flex-1">
+                                <h3 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-blue-600 transition-colors">
+                                    {service.title}
+                                </h3>
+
+                                <p className={`text-slate-600 leading-relaxed ${service.tags ? 'mb-4' : ''}`}>
+                                    {service.description}
+                                </p>
+
+                                {service.tags && (
+                                    <div className="mt-auto pt-4 flex flex-wrap gap-2">
+                                        {(service.tags as string[]).map((tag, i) => (
+                                            <span key={i} className="px-2.5 py-1 bg-slate-100 text-slate-600 rounded-lg text-xs font-medium">
+                                                {tag}
+                                            </span>
+                                        ))}
+                                    </div>
+                                )}
                             </div>
-
-                            <h3 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-blue-600 transition-colors">
-                                {service.title}
-                            </h3>
-
-                            <p className={`text-slate-600 leading-relaxed ${service.tags ? 'mb-4' : ''}`}>
-                                {service.description}
-                            </p>
-
-                            {service.tags && (
-                                <div className="mt-auto pt-4 flex flex-wrap gap-2">
-                                    {(service.tags as string[]).map((tag, i) => (
-                                        <span key={i} className="px-2.5 py-1 bg-slate-100 text-slate-600 rounded-lg text-xs font-medium">
-                                            {tag}
-                                        </span>
-                                    ))}
-                                </div>
-                            )}
                         </motion.div>
                     ))}
                 </motion.div>

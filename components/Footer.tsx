@@ -34,7 +34,7 @@ export default function Footer() {
                             Our Business Is To Protect Your Business & Property. Providing integrated security solutions to deter threats and safeguard your interests since 2009.
                         </p>
                         <div className="flex space-x-4 pt-2">
-                            <a href="#" className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all text-slate-400">
+                            <a href="https://www.facebook.com/pristine2009/info?tab=overview" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all text-slate-400">
                                 <Facebook className="w-5 h-5" />
                             </a>
                             <a href="#" className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center hover:bg-blue-400 hover:text-white transition-all text-slate-400">
@@ -88,11 +88,24 @@ export default function Footer() {
                         <ul className="space-y-4">
                             <li className="flex items-start gap-3 text-sm">
                                 <MapPin className="w-5 h-5 text-blue-500 shrink-0 mt-0.5" />
-                                <span>Banani Commercial Area,<br />Dhaka, Bangladesh</span>
+                                <div>
+                                    <span className="font-semibold text-white">Head Office:</span><br/>
+                                    <span>House No: 136/B, Road No: 22,<br />Mohakhali New D.O.H.S, Dhaka:1206</span>
+                                </div>
                             </li>
-                            <li className="flex items-center gap-3 text-sm">
-                                <PhoneCall className="w-5 h-5 text-blue-500 shrink-0" />
-                                <span>88-02-58817173-4</span>
+                            <li className="flex items-start gap-3 text-sm">
+                                <MapPin className="w-5 h-5 text-blue-500 shrink-0 mt-0.5" />
+                                <div>
+                                    <span className="font-semibold text-white">Chittagong Office:</span><br/>
+                                    <span>Madina Market, 6 Muradpur,<br />Panchlish, Chittagong</span>
+                                </div>
+                            </li>
+                            <li className="flex items-start gap-3 text-sm">
+                                <PhoneCall className="w-5 h-5 text-blue-500 shrink-0 mt-0.5" />
+                                <div className="space-y-1">
+                                    <span>Control: 02-58817173-4</span><br/>
+                                    <span>Hotline: +880-17-55-62-15-78</span>
+                                </div>
                             </li>
                             <li className="flex items-center gap-3 text-sm">
                                 <Mail className="w-5 h-5 text-blue-500 shrink-0" />
