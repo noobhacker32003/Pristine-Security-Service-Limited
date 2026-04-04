@@ -20,6 +20,11 @@ export const metadata: Metadata = {
     template: "%s | Pristine Security Service Limited",
   },
   description: "Pristine Security Service Limited provides elite, professional security solutions in Bangladesh including uniformed guarding, corporate security, event security, and physical protection.",
+  icons: {
+    icon: "/assets/logo1.png",
+    shortcut: "/assets/logo1.png",
+    apple: "/assets/logo1.png",
+  },
   openGraph: {
     title: "Pristine Security Service Limited",
     description: "Professional Security Services Company protecting your business and property in Bangladesh.",
