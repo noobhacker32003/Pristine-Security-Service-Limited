@@ -24,10 +24,11 @@ export default async function AdminLogin({ searchParams }: PageProps) {
         
         const password = formData.get('password');
         const adminPassword = process.env.ADMIN_PASSWORD;
+        const sessionSecret = process.env.ADMIN_SESSION_SECRET;
 
-        if (password === adminPassword && adminPassword) {
+        if (password === adminPassword && adminPassword && sessionSecret) {
             const cookieStore = await cookies();
-            cookieStore.set('admin_session', 'true', {
+            cookieStore.set('admin_session', sessionSecret, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
                 sameSite: 'lax',

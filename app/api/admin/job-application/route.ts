@@ -1,8 +1,12 @@
 import { NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import JobApplication from '@/models/JobApplication';
+import { requireAdminAuth } from '@/lib/auth';
 
 export async function PATCH(request: Request) {
+    const authError = await requireAdminAuth();
+    if (authError) return authError;
+
     try {
         await connectDB();
         const { id, newStatus } = await request.json();
@@ -25,6 +29,9 @@ export async function PATCH(request: Request) {
 }
 
 export async function DELETE(request: Request) {
+    const authError = await requireAdminAuth();
+    if (authError) return authError;
+
     try {
         await connectDB();
         const { searchParams } = new URL(request.url);

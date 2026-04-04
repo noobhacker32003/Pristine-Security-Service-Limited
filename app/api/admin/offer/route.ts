@@ -1,8 +1,12 @@
 import { NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import Offer from '@/models/Offer';
+import { requireAdminAuth } from '@/lib/auth';
 
 export async function POST(request: Request) {
+    const authError = await requireAdminAuth();
+    if (authError) return authError;
+
     try {
         await connectDB();
         const { title, badgeText, benefits } = await request.json();
@@ -32,6 +36,9 @@ export async function POST(request: Request) {
 }
 
 export async function DELETE(request: Request) {
+    const authError = await requireAdminAuth();
+    if (authError) return authError;
+
     try {
         await connectDB();
         // Since there is only one active offer logic in the initial requirement, 

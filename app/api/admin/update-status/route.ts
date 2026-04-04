@@ -2,17 +2,13 @@ import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/mongodb';
 import Report from '@/models/Report';
 import ServiceRequest from '@/models/ServiceRequest';
-import { cookies } from 'next/headers';
+import { requireAdminAuth } from '@/lib/auth';
 
 export async function PATCH(req: Request) {
-    try {
-        const cookieStore = await cookies();
-        const adminSession = cookieStore.get('admin_session');
-        
-        if (!adminSession || adminSession.value !== 'true') {
-            return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
-        }
+    const authError = await requireAdminAuth();
+    if (authError) return authError;
 
+    try {
         await dbConnect();
         
         const body = await req.json();
@@ -54,10 +50,10 @@ export async function PATCH(req: Request) {
             data: updatedDoc 
         }, { status: 200 });
 
-    } catch (error: any) {
+    } catch (error) {
         console.error('Status update error:', error);
         return NextResponse.json(
-            { message: error.message || 'Internal Server Error' }, 
+            { message: 'Internal Server Error' }, 
             { status: 500 }
         );
     }

@@ -28,10 +28,10 @@ export async function POST(req: Request) {
             { message: 'Service request submitted successfully', data: newRequest },
             { status: 201 }
         );
-    } catch (error: any) {
+    } catch (error) {
         console.error('Service request error:', error);
         return NextResponse.json(
-            { message: error.message || 'Failed to submit service request' },
+            { message: 'Failed to submit service request' },
             { status: 500 }
         );
     }

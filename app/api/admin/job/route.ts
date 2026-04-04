@@ -1,8 +1,12 @@
 import { NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import JobPost from '@/models/JobPost';
+import { requireAdminAuth } from '@/lib/auth';
 
 export async function POST(request: Request) {
+    const authError = await requireAdminAuth();
+    if (authError) return authError;
+
     try {
         await connectDB();
         const { title, description, requirements, isActive = true } = await request.json();
@@ -24,6 +28,9 @@ export async function POST(request: Request) {
 }
 
 export async function PUT(request: Request) {
+    const authError = await requireAdminAuth();
+    if (authError) return authError;
+
     try {
         await connectDB();
         const { id, title, description, requirements, isActive } = await request.json();
@@ -46,6 +53,9 @@ export async function PUT(request: Request) {
 }
 
 export async function DELETE(request: Request) {
+    const authError = await requireAdminAuth();
+    if (authError) return authError;
+
     try {
         await connectDB();
         const { searchParams } = new URL(request.url);
