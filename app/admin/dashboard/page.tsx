@@ -13,7 +13,7 @@ export default async function AdminDashboard() {
     const cookieStore = await cookies();
     const adminSession = cookieStore.get('admin_session');
 
-    if (!adminSession || adminSession.value !== 'true') {
+    if (!adminSession || !process.env.ADMIN_SESSION_SECRET || adminSession.value !== process.env.ADMIN_SESSION_SECRET) {
         redirect('/admin');
     }
 
