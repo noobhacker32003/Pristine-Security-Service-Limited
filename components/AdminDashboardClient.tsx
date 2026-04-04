@@ -47,10 +47,8 @@ export type JobApplicationType = {
     jobId: string;
     jobTitle: string;
     applicantName: string;
-    email: string;
+    age: string;
     phone: string;
-    resumeLink: string;
-    details?: string;
     status: string;
     createdAt: string;
 };
@@ -327,8 +325,8 @@ export default function AdminDashboardClient({
         const query = searchQuery.toLowerCase();
         return (
             app.applicantName?.toLowerCase().includes(query) ||
-            app.email?.toLowerCase().includes(query) ||
             app.phone?.toLowerCase().includes(query) ||
+            app.age?.toString().includes(query) ||
             app.jobTitle?.toLowerCase().includes(query)
         );
     });
@@ -450,7 +448,7 @@ export default function AdminDashboardClient({
                             placeholder={activeTab === 'service' ? "Search client name, email, details..." : "Search guard name, ID, details..."}
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            className="block w-full pl-11 pr-4 py-3.5 border border-slate-200 rounded-2xl bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all sm:text-sm text-slate-800 placeholder-slate-600"
+                            className="block w-full pl-11 pr-4 py-3.5 border border-slate-200 rounded-2xl bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all sm:text-sm text-slate-800 placeholder:text-slate-400"
                         />
                     </div>
                 </div>
@@ -636,7 +634,7 @@ export default function AdminDashboardClient({
                                             <label className="block text-sm font-semibold text-slate-700 mb-2">Offer Title</label>
                                             <input
                                                 {...register('title', { required: true })}
-                                                className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                                                className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-600 placeholder:text-slate-400 text-slate-800"
                                                 placeholder="e.g., Providing 24 Hours Security Service"
                                             />
                                         </div>
@@ -645,7 +643,7 @@ export default function AdminDashboardClient({
                                             <label className="block text-sm font-semibold text-slate-700 mb-2">Badge Text</label>
                                             <input
                                                 {...register('badgeText', { required: true })}
-                                                className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                                                className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-amber-500 placeholder:text-slate-400 text-slate-800"
                                                 placeholder="e.g., SPECIAL OFFER"
                                             />
                                         </div>
@@ -661,7 +659,7 @@ export default function AdminDashboardClient({
                                                             </div>
                                                             <input
                                                                 {...register(`benefits.${index}.value`, { required: true })}
-                                                                className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-green-500"
+                                                                className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-green-500 placeholder:text-slate-400 text-slate-800"
                                                                 placeholder={`Benefit ${index + 1}`}
                                                             />
                                                         </div>
@@ -732,7 +730,7 @@ export default function AdminDashboardClient({
                                             <label className="block text-sm font-semibold text-slate-700 mb-2">Job Title</label>
                                             <input
                                                 {...registerJob('title', { required: true })}
-                                                className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-cyan-600"
+                                                className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-cyan-600 placeholder:text-slate-400 text-slate-800"
                                                 placeholder="e.g., Senior Security Officer"
                                             />
                                         </div>
@@ -742,7 +740,7 @@ export default function AdminDashboardClient({
                                             <textarea
                                                 {...registerJob('description', { required: true })}
                                                 rows={4}
-                                                className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-cyan-600 resize-none"
+                                                className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-cyan-600 resize-none placeholder:text-slate-400 text-slate-800"
                                                 placeholder="Describe the job position..."
                                             />
                                         </div>
@@ -758,7 +756,7 @@ export default function AdminDashboardClient({
                                                             </div>
                                                             <input
                                                                 {...registerJob(`requirements.${index}.value` as const, { required: true })}
-                                                                className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                                                                className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-cyan-500 placeholder:text-slate-400 text-slate-800"
                                                                 placeholder={`Requirement ${index + 1}`}
                                                             />
                                                         </div>
@@ -859,7 +857,7 @@ export default function AdminDashboardClient({
                                                 <th className="px-6 py-4">Applicant</th>
                                                 <th className="px-6 py-4">Position</th>
                                                 <th className="px-6 py-4">Contact</th>
-                                                <th className="px-6 py-4 min-w-[200px]">Details & Resume</th>
+                                                <th className="px-6 py-4">Age</th>
                                                 <th className="px-6 py-4">Status</th>
                                             </tr>
                                         </thead>
@@ -875,18 +873,10 @@ export default function AdminDashboardClient({
                                                             <div className="font-medium text-slate-800">{app.jobTitle}</div>
                                                         </td>
                                                         <td className="px-6 py-5">
-                                                            <div className="text-slate-800">{app.email}</div>
-                                                            <div className="text-slate-500 text-xs mt-1">{app.phone}</div>
+                                                            <div className="text-slate-500">{app.phone}</div>
                                                         </td>
-                                                        <td className="px-6 py-5">
-                                                            <a href={app.resumeLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm text-blue-600 hover:text-blue-800 font-medium mb-2 border border-blue-200 bg-blue-50 px-3 py-1 rounded-full">
-                                                                View Resume Link
-                                                            </a>
-                                                            {app.details && (
-                                                                <div className="bg-slate-50 p-2 rounded-lg text-slate-600 text-xs mt-1 border border-slate-100">
-                                                                    {app.details}
-                                                                </div>
-                                                            )}
+                                                        <td className="px-6 py-5 font-semibold text-slate-800">
+                                                            {app.age}
                                                         </td>
                                                         <td className="px-6 py-5">
                                                             <div className="flex items-center gap-3">

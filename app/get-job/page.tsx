@@ -15,10 +15,8 @@ type JobPost = {
 
 type ApplicationForm = {
     applicantName: string;
-    email: string;
+    age: string;
     phone: string;
-    resumeLink: string;
-    details: string;
 };
 
 export default function GetJobPage() {
@@ -27,6 +25,7 @@ export default function GetJobPage() {
     const [selectedJob, setSelectedJob] = useState<JobPost | null>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitSuccess, setSubmitSuccess] = useState(false);
+    const [submitError, setSubmitError] = useState<string | null>(null);
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm<ApplicationForm>();
 
@@ -50,6 +49,7 @@ export default function GetJobPage() {
     const onSubmit = async (data: ApplicationForm) => {
         if (!selectedJob) return;
         setIsSubmitting(true);
+        setSubmitError(null);
         
         try {
             const res = await fetch('/api/job/apply', {
@@ -68,9 +68,13 @@ export default function GetJobPage() {
                     setSelectedJob(null);
                     reset();
                 }, 4000);
+            } else {
+                const errorData = await res.json();
+                setSubmitError(errorData.error || "Failed to submit application. Please try again.");
             }
         } catch (error) {
             console.error(error);
+            setSubmitError("Network error. Please try again later.");
         } finally {
             setIsSubmitting(false);
         }
@@ -177,53 +181,39 @@ export default function GetJobPage() {
                                             </ul>
                                         </div>
 
+                                        {submitError && (
+                                            <div className="mb-4 bg-red-50 text-red-600 p-3 rounded-xl border border-red-100 text-sm font-medium">
+                                                {submitError}
+                                            </div>
+                                        )}
+
                                         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                                                 <div>
                                                     <label className="block text-sm font-semibold text-slate-700 mb-1.5">Full Name *</label>
                                                     <input
                                                         {...register('applicantName', { required: true })}
-                                                        className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                                                        className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-600 focus:outline-none placeholder:text-slate-400 text-slate-800"
                                                         placeholder="John Doe"
                                                     />
                                                 </div>
                                                 <div>
-                                                    <label className="block text-sm font-semibold text-slate-700 mb-1.5">Phone Number *</label>
+                                                    <label className="block text-sm font-semibold text-slate-700 mb-1.5">Age *</label>
                                                     <input
-                                                        {...register('phone', { required: true })}
-                                                        className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-600 focus:outline-none"
-                                                        placeholder="+880 1XXXXXXXXX"
+                                                        type="number"
+                                                        {...register('age', { required: true })}
+                                                        className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-600 focus:outline-none placeholder:text-slate-400 text-slate-800"
+                                                        placeholder="e.g. 25"
                                                     />
                                                 </div>
                                             </div>
                                             
                                             <div>
-                                                <label className="block text-sm font-semibold text-slate-700 mb-1.5">Email Address *</label>
+                                                <label className="block text-sm font-semibold text-slate-700 mb-1.5">Phone Number *</label>
                                                 <input
-                                                    type="email"
-                                                    {...register('email', { required: true })}
-                                                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-600 focus:outline-none"
-                                                    placeholder="john@example.com"
-                                                />
-                                            </div>
-
-                                            <div>
-                                                <label className="block text-sm font-semibold text-slate-700 mb-1.5">Link to Resume / CV *</label>
-                                                <input
-                                                    {...register('resumeLink', { required: true })}
-                                                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-600 focus:outline-none"
-                                                    placeholder="Google Drive or Dropbox link..."
-                                                />
-                                                <p className="text-xs text-slate-500 mt-1">Please ensure the link is publicly accessible.</p>
-                                            </div>
-
-                                            <div>
-                                                <label className="block text-sm font-semibold text-slate-700 mb-1.5">Additional Details</label>
-                                                <textarea
-                                                    {...register('details')}
-                                                    rows={3}
-                                                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-600 focus:outline-none resize-none"
-                                                    placeholder="Any other information you'd like us to know..."
+                                                    {...register('phone', { required: true })}
+                                                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-600 focus:outline-none placeholder:text-slate-400 text-slate-800"
+                                                    placeholder="+880 1XXXXXXXXX"
                                                 />
                                             </div>
 

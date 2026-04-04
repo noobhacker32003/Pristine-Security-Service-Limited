@@ -49,19 +49,19 @@ const services = [
   {
     icon: <Badge className="w-6 h-6 text-blue-600" />,
     title: 'Uniformed Guarding',
-    image: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=800&q=80',
+    image: '/assets/images/services/Uniformed Guarding.jpeg',
     description: 'Professional security officers ensuring safe environments for our clients nationwide.',
   },
   {
     icon: <Ticket className="w-6 h-6 text-blue-600" />,
     title: 'Special Event Security',
-    image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80',
+    image: '/assets/images/services/Entertainment Security.png',
     description: 'Efficient staffing for high-visibility venues, concerts, and corporate events.',
   },
   {
     icon: <Cctv className="w-6 h-6 text-blue-600" />,
     title: 'Console Operations',
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
+    image: '/assets/images/services/Console Operations.webp',
     description: 'Expert monitoring of CCTV, fire detection, and intrusion detection systems.',
   },
   {

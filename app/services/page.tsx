@@ -49,13 +49,13 @@ const servicesList = [
     {
         icon: <Badge className="w-6 h-6" />,
         title: "Uniformed Guarding",
-        image: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=800&q=80",
+        image: "/assets/images/services/Uniformed Guarding.jpeg",
         description: "Every day approximately 2,000 uniformed Pristine Security Guards, Supervisors, Inspectors and Security Officers perform a variety of duties to help maintain secure environments for a good number of clients across the Country."
     },
     {
         icon: <Ticket className="w-6 h-6" />,
         title: "Entertainment Security",
-        image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80",
+        image: "/assets/images/services/Entertainment Security.png",
         description: "Comprehensive security services for TV companies, theme parks, sports events, corporate events, and other entertainment venues.",
         category: ["events", "media", "venues"],
         tags: ["event security", "crowd management", "VIP protection"]
@@ -63,7 +63,7 @@ const servicesList = [
     {
         icon: <Cctv className="w-6 h-6" />,
         title: "Console Operations",
-        image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
+        image: "/assets/images/services/Console Operations.webp",
         description: "Our console operators monitor CCTV, Access Control, Fire Detection and Intrusion Detection Systems. We also monitor Visitor Arrivals and Departures, and coordinate with Officers on Patrol."
     },
     {
