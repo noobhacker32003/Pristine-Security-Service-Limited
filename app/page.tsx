@@ -67,7 +67,7 @@ const services = [
   {
     icon: <ShieldCheck className="w-6 h-6 text-blue-600" />,
     title: 'Physical Protection',
-    image: 'https://images.unsplash.com/photo-1588776814546-1ffedbe47426?w=800&q=80',
+    image: '/assets/Physical Protection.png',
     description: 'Installation and maintenance of physical deterrents like razor wires and fences.',
   },
 ];
