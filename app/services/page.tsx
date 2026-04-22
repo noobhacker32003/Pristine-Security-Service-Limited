@@ -69,19 +69,19 @@ const servicesList = [
     {
         icon: <ShieldCheck className="w-6 h-6" />,
         title: "Physical Protection",
-        image: "https://images.unsplash.com/photo-1588776814546-1ffedbe47426?w=800&q=80",
+        image: "/assets/Physical Protection.png",
         description: "One of the very few Private Security Service Provider Companies in Bangladesh taking the responsibility of installing Barbed wire, Razor wire, and Electric Fences over existing boundary walls."
     },
     {
         icon: <Users className="w-6 h-6" />,
         title: "Reception/Concierge Services",
-        image: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&q=80",
+        image: "/assets/ReceptionConciergeServices.png",
         description: "Monitoring Access of Employees, Contractors and Visitors to Facilities, issuing Badges, Maintaining Logs, Inspecting Bags and Packages and giving directions."
     },
     {
         icon: <Building2 className="w-6 h-6" />,
         title: "Building Security",
-        image: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80",
+        image: "/assets/Building Security.png",
         description: "Pristine Security Service has experience in providing security for commercial and residential buildings.",
         category: ["commercial", "residential"],
         tags: ["guards", "property protection", "access control"]
@@ -89,7 +89,7 @@ const servicesList = [
     {
         icon: <GraduationCap className="w-6 h-6" />,
         title: "Educational Institutions Security",
-        image: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&q=80",
+        image: "/assets/EducationalInstitutionsSecurity.png",
         description: "Security solutions for educational institutions addressing a wide range of unique and evolving security threats.",
         category: ["schools", "colleges", "universities"],
         tags: ["student safety", "campus security", "risk management"]
@@ -97,7 +97,7 @@ const servicesList = [
     {
         icon: <Utensils className="w-6 h-6" />,
         title: "Hospitality Security",
-        image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80",
+        image: "/assets/Hospitality Security.png",
         description: "Focused on enhancing security and life safety standards within the hospitality and hotel industry.",
         category: ["hotels", "resorts"],
         tags: ["guest safety", "asset protection", "24/7 monitoring"]
@@ -105,7 +105,7 @@ const servicesList = [
     {
         icon: <Factory className="w-6 h-6" />,
         title: "Manufacturing Facilities Security",
-        image: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80",
+        image: "/assets/Manufacturing Facilities Security.png",
         description: "Security solutions for manufacturing industries to prevent losses caused by external threats and insider risks.",
         category: ["factories", "industries"],
         tags: ["industrial security", "loss prevention", "risk control"]
@@ -113,7 +113,7 @@ const servicesList = [
     {
         icon: <MapPin className="w-6 h-6" />,
         title: "Community Security",
-        image: "https://images.unsplash.com/photo-1577495508048-b635879837f1?w=800&q=80",
+        image: "/assets/Community Security.png",
         description: "Security services for public agencies such as municipalities, city councils, national government authorities, and international organizations.",
         category: ["government", "public sector"],
         tags: ["public safety", "crowd control", "surveillance"]
