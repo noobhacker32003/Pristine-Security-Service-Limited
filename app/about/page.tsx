@@ -17,10 +17,13 @@ export default function AboutPage() {
             <section className="bg-slate-900 min-h-[40vh] md:min-h-[calc(60vh+200px)] py-20 flex flex-col justify-center text-center relative overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <div className="absolute inset-0 bg-slate-900/90 mix-blend-multiply" />
-                    <img
+                    <Image
                         src="/assets/images/about.jpeg"
                         alt="Security meeting"
-                        className="w-full h-full object-cover object-center opacity-30"
+                        fill
+                        sizes="100vw"
+                        priority
+                        className="object-cover object-center opacity-30"
                     />
                 </div>
                 <div className="relative z-10 max-w-4xl mx-auto px-4">
@@ -52,10 +55,12 @@ export default function AboutPage() {
                         variants={fadeInUp}
                         className="relative h-[280px] sm:h-[350px] md:h-[450px] lg:h-[600px] rounded-2xl overflow-hidden shadow-2xl bg-slate-100"
                     >
-                        <img
+                        <Image
                             src="/assets/images/legacy.jpeg"
                             alt="Security Guard"
-                            className="w-full h-full object-contain md:object-cover"
+                            fill
+                            sizes="(max-width: 1024px) 100vw, 50vw"
+                            className="object-contain md:object-cover"
                         />
                     </motion.div>
 

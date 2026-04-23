@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { useState, ReactNode } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowRight, Shield, MapPin, Search, Users, Settings, Building, Briefcase, Badge, Ticket, Cctv, ShieldCheck } from 'lucide-react';
 
 
@@ -33,11 +34,13 @@ function ServiceImage({ src, title, icon }: { src: string; title: string; icon: 
   }
 
   return (
-    <div className="w-full h-44 overflow-hidden bg-slate-100">
-      <img
+    <div className="w-full h-44 overflow-hidden bg-slate-100 relative">
+      <Image
         src={src}
         alt={title}
-        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+        fill
+        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+        className="object-cover group-hover:scale-105 transition-transform duration-500"
         onError={() => setFailed(true)}
       />
     </div>
@@ -91,10 +94,13 @@ export default function Home() {
       <section className="relative bg-slate-900 overflow-hidden min-h-[90vh] flex items-center">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-r from-blue-900/90 to-slate-900/90 mix-blend-multiply" />
-          <img
+          <Image
             src="/assets/images/Hero/Hero (1).jpeg"
             alt="Security professionals in a corporate setting"
-            className="w-full h-full object-cover opacity-40"
+            fill
+            sizes="100vw"
+            priority
+            className="object-cover opacity-40"
           />
         </div>
 
@@ -175,10 +181,12 @@ export default function Home() {
               transition={{ duration: 0.8 }}
               className="relative rounded-2xl overflow-hidden shadow-2xl h-[500px]"
             >
-              <img
+              <Image
                 src="/assets/images/Hero/Hero (3).jpeg"
                 alt="Security monitoring"
-                className="w-full h-full object-cover"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent flex items-end p-8">
                 <div className="bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-xl w-full">
@@ -268,9 +276,11 @@ export default function Home() {
                 className="transition-all duration-300 cursor-pointer"
               >
                 {/* Note: Update the exact src path whenever you upload real logos to your public folder */}
-                <img
+                <Image
                   src={client.logo}
                   alt={client.name}
+                  width={160}
+                  height={80}
                   className="h-16 md:h-20 w-auto object-contain rounded-xl transition-shadow"
                 />
               </motion.div>

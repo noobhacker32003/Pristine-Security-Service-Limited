@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useState, ReactNode } from 'react';
+import Image from 'next/image';
 import { Shield, Users, Building2, MapPin, GraduationCap, Utensils, CheckCircle2, Ticket, Cctv, ShieldCheck, Factory, Badge, CalendarCheck } from 'lucide-react';
 
 const fadeInUp = {
@@ -33,11 +34,13 @@ function ServiceImage({ src, title, icon }: { src: string; title: string; icon: 
     }
 
     return (
-        <div className="w-full h-48 overflow-hidden bg-slate-100">
-            <img
+        <div className="w-full h-48 overflow-hidden bg-slate-100 relative">
+            <Image
                 src={src}
                 alt={title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
                 onError={() => setFailed(true)}
             />
         </div>
