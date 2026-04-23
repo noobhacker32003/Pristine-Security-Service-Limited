@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { motion, AnimatePresence } from 'framer-motion';
 import { User, Mail, Phone, Calendar, FileText, Send, CheckCircle2, ShieldCheck, Loader2, AlertCircle } from 'lucide-react';
+import { useMutation } from '@tanstack/react-query';
+import { apiMutate } from '@/lib/api';
 
 type FormData = {
     name: string;
@@ -14,39 +16,28 @@ type FormData = {
 };
 
 export default function GetServicePage() {
-    const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm<FormData>();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>();
     const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
     const [errorMessage, setErrorMessage] = useState('');
 
-    const onSubmit = async (data: FormData) => {
-        try {
-            setStatus('idle');
-            setErrorMessage('');
-            
-            const response = await fetch('/api/get-service', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data),
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.message || 'Something went wrong');
-            }
-
+    const serviceMutation = useMutation({
+        mutationFn: (data: FormData) =>
+            apiMutate('/api/get-service', { method: 'POST', body: data }),
+        onSuccess: () => {
             setStatus('success');
             reset();
-            
-            // Auto hide success message after 5 seconds
-            setTimeout(() => {
-                setStatus('idle');
-            }, 5000);
-            
-        } catch (error: any) {
-            console.error('Form submission error:', error);
+            setTimeout(() => setStatus('idle'), 5000);
+        },
+        onError: (error: Error) => {
             setStatus('error');
             setErrorMessage(error.message || 'Failed to submit the request. Please try again.');
-        }
+        },
+    });
+
+    const onSubmit = (data: FormData) => {
+        setStatus('idle');
+        setErrorMessage('');
+        serviceMutation.mutate(data);
     };
 
     return (
@@ -253,10 +244,10 @@ export default function GetServicePage() {
                                     <div className="pt-2">
                                         <button
                                             type="submit"
-                                            disabled={isSubmitting}
+                                            disabled={serviceMutation.isPending}
                                             className="w-full flex justify-center items-center gap-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed text-white px-8 py-4 rounded-xl font-semibold transition-all shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600"
                                         >
-                                            {isSubmitting ? (
+                                            {serviceMutation.isPending ? (
                                                 <>
                                                     <Loader2 className="w-5 h-5 animate-spin" />
                                                     Submitting Request...

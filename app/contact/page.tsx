@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { MapPin, Phone, Mail, Send, Loader2, CheckCircle2, Globe } from 'lucide-react';
+import { useMutation } from '@tanstack/react-query';
+import { apiMutate } from '@/lib/api';
 
 // ... (Will use multi_replace_file_content for multiple places instead)
 
@@ -14,34 +16,26 @@ type ContactFormData = {
 };
 
 export default function ContactPage() {
-    const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const [errorMsg, setErrorMsg] = useState('');
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm<ContactFormData>();
 
-    const onSubmit = async (data: ContactFormData) => {
-        setIsSubmitting(true);
-        setErrorMsg('');
-        try {
-            const res = await fetch('/api/contact', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data),
-            });
+    const contactMutation = useMutation({
+        mutationFn: (data: ContactFormData) =>
+            apiMutate('/api/contact', { method: 'POST', body: data }),
+        onSuccess: () => {
+            setIsSuccess(true);
+            reset();
+        },
+        onError: (error: Error) => {
+            setErrorMsg(error.message || 'Failed to send message.');
+        },
+    });
 
-            if (res.ok) {
-                setIsSuccess(true);
-                reset();
-            } else {
-                const errorData = await res.json();
-                setErrorMsg(errorData.error || 'Failed to send message.');
-            }
-        } catch (error) {
-            setErrorMsg('An unexpected error occurred.');
-        } finally {
-            setIsSubmitting(false);
-        }
+    const onSubmit = (data: ContactFormData) => {
+        setErrorMsg('');
+        contactMutation.mutate(data);
     };
 
     return (
@@ -125,11 +119,11 @@ export default function ContactPage() {
 
                                 <button
                                     type="submit"
-                                    disabled={isSubmitting}
+                                    disabled={contactMutation.isPending}
                                     className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl transition-colors flex justify-center items-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed shadow-md"
                                 >
-                                    {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : <Send className="w-5 h-5" />}
-                                    {isSubmitting ? 'Sending...' : 'Send Message'}
+                                    {contactMutation.isPending ? <Loader2 className="w-5 h-5 animate-spin" /> : <Send className="w-5 h-5" />}
+                                    {contactMutation.isPending ? 'Sending...' : 'Send Message'}
                                 </button>
                             </form>
                         )}

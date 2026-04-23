@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle2, ArrowRight, Tag, Shield, Clock, Star, Sparkles, Phone, Award } from 'lucide-react';
 import Link from 'next/link';
+import { useQuery } from '@tanstack/react-query';
+import { apiFetch, queryKeys } from '@/lib/api';
 
 type OfferData = {
     title: string;
@@ -112,36 +113,13 @@ function NoOfferState() {
 
 /* ─────────────── Main Page ─────────────── */
 export default function OfferPage() {
-    const [offer, setOffer] = useState<OfferData | null>(null);
-    const [loading, setLoading] = useState(true);
-    const [hasOffer, setHasOffer] = useState(true);
+    const { data: offer, isLoading, isError } = useQuery<OfferData | null>({
+        queryKey: queryKeys.offer,
+        queryFn: () => apiFetch<OfferData | null>('/api/offer'),
+    });
 
-    useEffect(() => {
-        const fetchOffer = async () => {
-            try {
-                const res = await fetch('/api/offer');
-                if (res.ok) {
-                    const data = await res.json();
-                    if (data) {
-                        setOffer(data);
-                        setHasOffer(true);
-                    } else {
-                        setHasOffer(false);
-                    }
-                } else {
-                    setHasOffer(false);
-                }
-            } catch {
-                setHasOffer(false);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchOffer();
-    }, []);
-
-    if (loading) return <OfferSkeleton />;
-    if (!hasOffer || !offer) return <NoOfferState />;
+    if (isLoading) return <OfferSkeleton />;
+    if (isError || !offer) return <NoOfferState />;
 
     const containerVariants = {
         hidden: { opacity: 0 },

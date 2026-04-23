@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { ShieldAlert, Send, Loader2, CheckCircle2, AlertTriangle } from 'lucide-react';
+import { useMutation } from '@tanstack/react-query';
+import { apiMutate } from '@/lib/api';
 
 type ReportFormData = {
     guardName: string;
@@ -12,34 +14,26 @@ type ReportFormData = {
 };
 
 export default function ReportPage() {
-    const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const [errorMsg, setErrorMsg] = useState('');
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm<ReportFormData>();
 
-    const onSubmit = async (data: ReportFormData) => {
-        setIsSubmitting(true);
-        setErrorMsg('');
-        try {
-            const res = await fetch('/api/report', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data),
-            });
+    const reportMutation = useMutation({
+        mutationFn: (data: ReportFormData) =>
+            apiMutate('/api/report', { method: 'POST', body: data }),
+        onSuccess: () => {
+            setIsSuccess(true);
+            reset();
+        },
+        onError: (error: Error) => {
+            setErrorMsg(error.message || 'Failed to submit report.');
+        },
+    });
 
-            if (res.ok) {
-                setIsSuccess(true);
-                reset();
-            } else {
-                const errorData = await res.json();
-                setErrorMsg(errorData.error || 'Failed to submit report.');
-            }
-        } catch (error) {
-            setErrorMsg('An unexpected error occurred.');
-        } finally {
-            setIsSubmitting(false);
-        }
+    const onSubmit = (data: ReportFormData) => {
+        setErrorMsg('');
+        reportMutation.mutate(data);
     };
 
     return (
@@ -139,11 +133,11 @@ export default function ReportPage() {
 
                                 <button
                                     type="submit"
-                                    disabled={isSubmitting}
+                                    disabled={reportMutation.isPending}
                                     className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 rounded-xl transition-colors flex justify-center items-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed shadow-md text-lg"
                                 >
-                                    {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : <Send className="w-5 h-5" />}
-                                    {isSubmitting ? 'Submitting Report...' : 'Securely Submit Report'}
+                                    {reportMutation.isPending ? <Loader2 className="w-5 h-5 animate-spin" /> : <Send className="w-5 h-5" />}
+                                    {reportMutation.isPending ? 'Submitting Report...' : 'Securely Submit Report'}
                                 </button>
                             </form>
                         )}

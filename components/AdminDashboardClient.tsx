@@ -6,6 +6,8 @@ import { useForm, useFieldArray } from 'react-hook-form';
 import { Search, LogOut, ShieldCheck, ClipboardSignature, AlertTriangle, CheckCircle2, AlertCircle, Loader2, Plus, Trash2, Tag, Medal, Briefcase, FileText } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { logoutAdmin } from '@/app/admin/actions';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { apiFetch, apiMutate, queryKeys } from '@/lib/api';
 
 type OfferFormValues = {
     title: string;
@@ -74,8 +76,6 @@ export default function AdminDashboardClient({
     const [updatingId, setUpdatingId] = useState<string | null>(null);
     const [toastMsg, setToastMsg] = useState<{ type: 'success' | 'error', text: string } | null>(null);
     const router = useRouter();
-
-    const [isOfferLoading, setIsOfferLoading] = useState(false);
     
     const { register, control, handleSubmit, reset } = useForm<OfferFormValues>({
         defaultValues: {
@@ -101,56 +101,40 @@ export default function AdminDashboardClient({
 
     const [isJobLoading, setIsJobLoading] = useState(false);
 
+    // Fetch offer data using TanStack Query
+    const { data: offerData, isLoading: isOfferLoading } = useQuery({
+        queryKey: queryKeys.adminOffer,
+        queryFn: () => apiFetch<{ title: string; badgeText: string; benefits: string[] } | null>('/api/offer'),
+        enabled: activeTab === 'offer',
+    });
+
+    // Populate form when offer data arrives (v5 pattern: useEffect instead of onSuccess)
     useEffect(() => {
-        if (activeTab === 'offer') {
-            fetchOffer();
-        }
-    }, [activeTab]);
-
-    const fetchOffer = async () => {
-        setIsOfferLoading(true);
-        try {
-            const res = await fetch('/api/offer');
-            if (res.ok) {
-                const data = await res.json();
-                if (data) {
-                    reset({
-                        title: data.title || '',
-                        badgeText: data.badgeText || '',
-                        benefits: data.benefits && data.benefits.length > 0 
-                            ? data.benefits.map((b: string) => ({ value: b }))
-                            : [{ value: '' }]
-                    });
-                }
-            }
-        } catch (e) {
-            console.error(e);
-        } finally {
-            setIsOfferLoading(false);
-        }
-    };
-
-    const onSubmitOffer = async (data: OfferFormValues) => {
-        try {
-            const payload = {
-                title: data.title,
-                badgeText: data.badgeText,
-                benefits: data.benefits.map(b => b.value).filter(b => b.trim() !== '')
-            };
-            const res = await fetch('/api/admin/offer', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
+        if (offerData) {
+            reset({
+                title: offerData.title || '',
+                badgeText: offerData.badgeText || '',
+                benefits: offerData.benefits && offerData.benefits.length > 0 
+                    ? offerData.benefits.map((b: string) => ({ value: b }))
+                    : [{ value: '' }]
             });
-            if (res.ok) {
-                showToast('success', 'Offer updated successfully');
-            } else {
-                showToast('error', 'Failed to update offer');
-            }
-        } catch (e) {
-            console.error(e);
-            showToast('error', 'An error occurred');
         }
+    }, [offerData, reset]);
+
+    const offerMutation = useMutation({
+        mutationFn: (payload: { title: string; badgeText: string; benefits: string[] }) =>
+            apiMutate('/api/admin/offer', { method: 'POST', body: payload }),
+        onSuccess: () => showToast('success', 'Offer updated successfully'),
+        onError: () => showToast('error', 'Failed to update offer'),
+    });
+
+    const onSubmitOffer = (data: OfferFormValues) => {
+        const payload = {
+            title: data.title,
+            badgeText: data.badgeText,
+            benefits: data.benefits.map(b => b.value).filter(b => b.trim() !== '')
+        };
+        offerMutation.mutate(payload);
     };
 
     const onSubmitJob = async (data: any) => {
@@ -279,20 +263,18 @@ export default function AdminDashboardClient({
         }
     };
 
-    const handleDeleteOffer = async () => {
-        if (!window.confirm("Are you sure you want to delete the active offer?")) return;
-        setIsOfferLoading(true);
-        try {
-            const res = await fetch(`/api/admin/offer`, { method: 'DELETE' });
-            if (!res.ok) throw new Error('Failed to delete offer');
+    const deleteOfferMutation = useMutation({
+        mutationFn: () => apiMutate('/api/admin/offer', { method: 'DELETE' }),
+        onSuccess: () => {
             reset({ title: '', badgeText: '', benefits: [{ value: '' }] });
             showToast('success', 'Active offer deleted successfully');
-        } catch (error) {
-            console.error(error);
-            showToast('error', 'Error deleting offer');
-        } finally {
-            setIsOfferLoading(false);
-        }
+        },
+        onError: () => showToast('error', 'Error deleting offer'),
+    });
+
+    const handleDeleteOffer = () => {
+        if (!window.confirm("Are you sure you want to delete the active offer?")) return;
+        deleteOfferMutation.mutate();
     };
 
     const getStatusColorClass = (status?: string) => {

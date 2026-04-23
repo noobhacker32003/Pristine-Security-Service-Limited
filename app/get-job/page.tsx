@@ -1,9 +1,11 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Briefcase, MapPin, ChevronRight, CheckCircle2, ArrowRight, X, Loader2, Clock, Users, Shield, Building2, CalendarDays, ListChecks } from 'lucide-react';
 import { useForm } from 'react-hook-form';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { apiFetch, apiMutate, queryKeys } from '@/lib/api';
 
 type JobPost = {
     _id: string;
@@ -103,64 +105,39 @@ function formatDate(dateStr: string) {
 
 /* ─────────────── Main Page ─────────────── */
 export default function GetJobPage() {
-    const [jobs, setJobs] = useState<JobPost[]>([]);
-    const [loading, setLoading] = useState(true);
+    const queryClient = useQueryClient();
     const [selectedJob, setSelectedJob] = useState<JobPost | null>(null);
-    const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitSuccess, setSubmitSuccess] = useState(false);
     const [submitError, setSubmitError] = useState<string | null>(null);
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm<ApplicationForm>();
 
-    useEffect(() => {
-        const fetchJobs = async () => {
-            try {
-                const res = await fetch('/api/job');
-                if (res.ok) {
-                    const data = await res.json();
-                    setJobs(data);
-                }
-            } catch (error) {
-                console.error("Failed to load jobs");
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchJobs();
-    }, []);
+    const { data: jobs = [], isLoading: loading } = useQuery<JobPost[]>({
+        queryKey: queryKeys.jobs,
+        queryFn: () => apiFetch<JobPost[]>('/api/job'),
+    });
 
-    const onSubmit = async (data: ApplicationForm) => {
+    const applyMutation = useMutation({
+        mutationFn: (payload: { jobId: string } & ApplicationForm) =>
+            apiMutate('/api/job/apply', { method: 'POST', body: payload }),
+        onSuccess: () => {
+            setSubmitSuccess(true);
+            queryClient.invalidateQueries({ queryKey: queryKeys.jobs });
+            setTimeout(() => {
+                setSubmitSuccess(false);
+                setSelectedJob(null);
+                reset();
+            }, 4000);
+        },
+        onError: (error: Error) => {
+            setSubmitError(error.message || "Failed to submit application. Please try again.");
+        },
+    });
+
+    const onSubmit = (data: ApplicationForm) => {
         if (!selectedJob) return;
-        setIsSubmitting(true);
         setSubmitError(null);
-
-        try {
-            const res = await fetch('/api/job/apply', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    jobId: selectedJob._id,
-                    ...data
-                })
-            });
-
-            if (res.ok) {
-                setSubmitSuccess(true);
-                setTimeout(() => {
-                    setSubmitSuccess(false);
-                    setSelectedJob(null);
-                    reset();
-                }, 4000);
-            } else {
-                const errorData = await res.json();
-                setSubmitError(errorData.error || "Failed to submit application. Please try again.");
-            }
-        } catch (error) {
-            console.error(error);
-            setSubmitError("Network error. Please try again later.");
-        } finally {
-            setIsSubmitting(false);
-        }
+        applyMutation.mutate({ jobId: selectedJob._id, ...data });
     };
 
     if (loading) return <PageSkeleton />;
@@ -445,10 +422,10 @@ export default function GetJobPage() {
                                                 </button>
                                                 <button
                                                     type="submit"
-                                                    disabled={isSubmitting}
+                                                    disabled={applyMutation.isPending}
                                                     className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-colors shadow-md flex items-center justify-center min-w-[160px] gap-2"
                                                 >
-                                                    {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : (
+                                                    {applyMutation.isPending ? <Loader2 className="w-5 h-5 animate-spin" /> : (
                                                         <>
                                                             Submit Application
                                                             <ArrowRight className="w-4 h-4" />
