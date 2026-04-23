@@ -166,7 +166,7 @@ export default function ContactPage() {
                                                 <MapPin className="w-4 h-4 text-blue-400" />
                                             </div>
                                             <div>
-                                                <p className="text-slate-300 leading-relaxed">House No: 136/B, Road No: 22,<br />Mohakhali New D.O.H.S,<br />Dhaka:1206, Bangladesh.</p>
+                                                <p className="text-slate-300 leading-relaxed">House-223,Lake Road,Lane-15,<br />Mohakhali DOHS,<br />Dhaka 1206, Bangladesh.</p>
                                             </div>
                                         </div>
                                         <div className="flex items-start gap-3 text-sm flex-wrap sm:flex-nowrap">
@@ -180,7 +180,7 @@ export default function ContactPage() {
                                                 </div>
                                                 <div>
                                                     <span className="block text-slate-400 text-xs uppercase tracking-wider mb-0.5">Hotline</span>
-                                                    <span className="text-slate-200">+880-17-55-62-15-78</span>
+                                                    <span className="text-slate-200">+8801755621578</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -201,14 +201,16 @@ export default function ContactPage() {
 
                                 {/* Chittagong Office */}
                                 <div>
-                                    <h3 className="text-xl font-bold mb-5 text-blue-400 border-b border-slate-700 pb-2">Chittagong Office</h3>
+                                    <h3 className="text-xl font-bold mb-5 text-blue-400 border-b border-slate-700 pb-2">National Training School</h3>
                                     <div className="space-y-4 mb-6">
                                         <div className="flex items-start gap-3 text-sm">
                                             <div className="w-8 h-8 bg-blue-600/20 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
                                                 <MapPin className="w-4 h-4 text-blue-400" />
                                             </div>
                                             <div>
-                                                <p className="text-slate-300 leading-relaxed">Madina Market 3rd Floor,<br />6 Muradpur, Panchlish,<br />Chittagong.</p>
+
+
+                                                <p className="text-slate-300 leading-relaxed">Plot # 60, Road # 103, Sector # 01,<br />Purbachal, Dhaka.</p>
                                             </div>
                                         </div>
                                         <div className="flex items-start gap-3 text-sm flex-wrap sm:flex-nowrap">
@@ -222,7 +224,7 @@ export default function ContactPage() {
                                                 </div>
                                                 <div>
                                                     <span className="block text-slate-400 text-xs uppercase tracking-wider mb-0.5">Hotline</span>
-                                                    <span className="text-slate-200">880-17-55-69-44-99</span>
+                                                    <span className="text-slate-200">+8801755694499</span>
                                                 </div>
                                             </div>
                                         </div>

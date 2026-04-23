@@ -71,7 +71,8 @@ export default function Footer() {
                                 'Special Event Security',
                                 'Console Operations',
                                 'Physical Protection',
-                                'Manufacturing Security'
+                                'Manufacturing Security',
+                                'Event Security Management'
                             ].map((service) => (
                                 <li key={service}>
                                     <Link href="/services" className="text-sm hover:text-white hover:translate-x-1 inline-block transition-transform">
@@ -89,22 +90,22 @@ export default function Footer() {
                             <li className="flex items-start gap-3 text-sm">
                                 <MapPin className="w-5 h-5 text-blue-500 shrink-0 mt-0.5" />
                                 <div>
-                                    <span className="font-semibold text-white">Head Office:</span><br/>
-                                    <span>House No: 136/B, Road No: 22,<br />Mohakhali New D.O.H.S, Dhaka:1206</span>
+                                    <span className="font-semibold text-white">Head Office:</span><br />
+                                    <span>House-223,Lake Road,Lane-15,<br />Mohakhali DOHS, Dhaka 1206</span>
                                 </div>
                             </li>
                             <li className="flex items-start gap-3 text-sm">
                                 <MapPin className="w-5 h-5 text-blue-500 shrink-0 mt-0.5" />
                                 <div>
-                                    <span className="font-semibold text-white">Chittagong Office:</span><br/>
-                                    <span>Madina Market, 6 Muradpur,<br />Panchlish, Chittagong</span>
+                                    <span className="font-semibold text-white">National Training School:</span><br />
+                                    <span>Plot # 60, Road # 103, Sector # 01,<br />Purbachal, Dhaka</span>
                                 </div>
                             </li>
                             <li className="flex items-start gap-3 text-sm">
                                 <PhoneCall className="w-5 h-5 text-blue-500 shrink-0 mt-0.5" />
                                 <div className="space-y-1">
-                                    <span>Control: 02-58817173-4</span><br/>
-                                    <span>Hotline: +880-17-55-62-15-78</span>
+                                    <span>Control: 02-58817173-4</span><br />
+                                    <span>Hotline: +8801755621578</span>
                                 </div>
                             </li>
                             <li className="flex items-center gap-3 text-sm">

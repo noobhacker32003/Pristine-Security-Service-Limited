@@ -10,6 +10,7 @@ type JobPost = {
     title: string;
     description: string;
     requirements: string[];
+    vacancy?: number;
     createdAt: string;
 };
 
@@ -211,17 +212,17 @@ export default function GetJobPage() {
                     </div>
                     <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm">
                         <div className="w-10 h-10 bg-green-50 rounded-xl flex items-center justify-center mb-3">
-                            <MapPin className="w-5 h-5 text-green-600" />
+                            <Users className="w-5 h-5 text-green-600" />
                         </div>
-                        <p className="text-2xl font-bold text-slate-900">BD</p>
-                        <p className="text-sm text-slate-500">Location</p>
+                        <p className="text-2xl font-bold text-slate-900">3,500+</p>
+                        <p className="text-sm text-slate-500">Total Employees</p>
                     </div>
                     <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm">
                         <div className="w-10 h-10 bg-violet-50 rounded-xl flex items-center justify-center mb-3">
                             <Users className="w-5 h-5 text-violet-600" />
                         </div>
-                        <p className="text-2xl font-bold text-slate-900">500+</p>
-                        <p className="text-sm text-slate-500">Team Members</p>
+                        <p className="text-2xl font-bold text-slate-900">{jobs.reduce((sum, j) => sum + (j.vacancy || 1), 0)}</p>
+                        <p className="text-sm text-slate-500">Total Vacancies</p>
                     </div>
                     <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm">
                         <div className="w-10 h-10 bg-amber-50 rounded-xl flex items-center justify-center mb-3">
@@ -284,9 +285,17 @@ export default function GetJobPage() {
                                         </h3>
 
                                         {/* Location */}
-                                        <div className="flex items-center gap-2 text-sm text-slate-500 font-medium mb-4">
+                                        <div className="flex items-center gap-2 text-sm text-slate-500 font-medium mb-2">
                                             <MapPin className="w-3.5 h-3.5" />
                                             Bangladesh
+                                        </div>
+
+                                        {/* Vacancy Badge */}
+                                        <div className="flex items-center gap-2 text-sm font-semibold mb-4">
+                                            <Users className="w-3.5 h-3.5 text-emerald-600" />
+                                            <span className="text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full text-xs border border-emerald-200">
+                                                {job.vacancy || 1} {(job.vacancy || 1) === 1 ? 'Vacancy' : 'Vacancies'}
+                                            </span>
                                         </div>
 
                                         {/* Description */}

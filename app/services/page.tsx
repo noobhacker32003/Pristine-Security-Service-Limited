@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useState, ReactNode } from 'react';
-import { Shield, Users, Building2, MapPin, GraduationCap, Utensils, CheckCircle2, Ticket, Cctv, ShieldCheck, Factory, Badge } from 'lucide-react';
+import { Shield, Users, Building2, MapPin, GraduationCap, Utensils, CheckCircle2, Ticket, Cctv, ShieldCheck, Factory, Badge, CalendarCheck } from 'lucide-react';
 
 const fadeInUp = {
     initial: { opacity: 0, y: 30 },
@@ -50,7 +50,7 @@ const servicesList = [
         icon: <Badge className="w-6 h-6" />,
         title: "Uniformed Guarding",
         image: "/assets/images/services/Uniformed Guarding.jpeg",
-        description: "Every day approximately 2,000 uniformed Pristine Security Guards, Supervisors, Inspectors and Security Officers perform a variety of duties to help maintain secure environments for a good number of clients across the Country."
+        description: "Every day approximately 3,500 uniformed Pristine Security Guards, Supervisors, Inspectors and Security Officers perform a variety of duties to help maintain secure environments for a good number of clients across the Country."
     },
     {
         icon: <Ticket className="w-6 h-6" />,
@@ -117,6 +117,14 @@ const servicesList = [
         description: "Security services for public agencies such as municipalities, city councils, national government authorities, and international organizations.",
         category: ["government", "public sector"],
         tags: ["public safety", "crowd control", "surveillance"]
+    },
+    {
+        icon: <CalendarCheck className="w-6 h-6" />,
+        title: "Event Security Management",
+        image: "/assets/images/services/Event Security Management.png",
+        description: "Comprehensive security planning and management for corporate conferences, cultural festivals, sporting events, and large-scale public gatherings. Our trained teams handle crowd control, access management, VIP protection, and emergency response coordination.",
+        category: ["events", "corporate", "public"],
+        tags: ["crowd management", "access control", "emergency response"]
     }
 ];
 

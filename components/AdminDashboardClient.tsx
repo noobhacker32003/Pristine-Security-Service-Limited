@@ -38,6 +38,7 @@ export type JobType = {
     title: string;
     description: string;
     requirements: string[];
+    vacancy: number;
     isActive: boolean;
     createdAt: string;
 };
@@ -90,7 +91,7 @@ export default function AdminDashboardClient({
     });
 
     const { register: registerJob, control: controlJob, handleSubmit: handleSubmitJob, reset: resetJob } = useForm({
-        defaultValues: { title: '', description: '', requirements: [{ value: '' }], isActive: true }
+        defaultValues: { title: '', description: '', vacancy: 1, requirements: [{ value: '' }], isActive: true }
     });
 
     const { fields: jobFields, append: appendJob, remove: removeJob } = useFieldArray({
@@ -158,6 +159,7 @@ export default function AdminDashboardClient({
             const payload = {
                 title: data.title,
                 description: data.description,
+                vacancy: Number(data.vacancy) || 1,
                 requirements: data.requirements.map((r: any) => r.value).filter((r: string) => r.trim() !== ''),
                 isActive: data.isActive
             };
@@ -746,6 +748,17 @@ export default function AdminDashboardClient({
                                         </div>
 
                                         <div>
+                                            <label className="block text-sm font-semibold text-slate-700 mb-2">Number of Vacancies</label>
+                                            <input
+                                                type="number"
+                                                min={1}
+                                                {...registerJob('vacancy', { required: true, min: 1 })}
+                                                className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-cyan-600 placeholder:text-slate-400 text-slate-800"
+                                                placeholder="e.g. 5"
+                                            />
+                                        </div>
+
+                                        <div>
                                             <label className="block text-sm font-semibold text-slate-700 mb-2">Requirements</label>
                                             <div className="space-y-3">
                                                 {jobFields.map((field, index) => (
@@ -817,6 +830,9 @@ export default function AdminDashboardClient({
                                                             <h4 className="font-semibold text-slate-900">{job.title}</h4>
                                                             <span className={`px-2.5 py-0.5 rounded-full text-xs font-semibold ${job.isActive ? 'bg-green-100 text-green-700' : 'bg-slate-100 text-slate-600'}`}>
                                                                 {job.isActive ? 'Active' : 'Inactive'}
+                                                            </span>
+                                                            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-100 text-blue-700">
+                                                                {job.vacancy || 1} {(job.vacancy || 1) === 1 ? 'vacancy' : 'vacancies'}
                                                             </span>
                                                         </div>
                                                         <p className="text-sm text-slate-600 line-clamp-2">{job.description}</p>

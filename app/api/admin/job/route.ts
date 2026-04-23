@@ -9,12 +9,13 @@ export async function POST(request: Request) {
 
     try {
         await connectDB();
-        const { title, description, requirements, isActive = true } = await request.json();
+        const { title, description, requirements, vacancy = 1, isActive = true } = await request.json();
         
         const job = new JobPost({
             title,
             description,
             requirements,
+            vacancy,
             isActive
         });
         
@@ -33,7 +34,7 @@ export async function PUT(request: Request) {
 
     try {
         await connectDB();
-        const { id, title, description, requirements, isActive } = await request.json();
+        const { id, title, description, requirements, vacancy, isActive } = await request.json();
         
         if (!id) {
             return NextResponse.json({ error: "Job ID is required" }, { status: 400 });
@@ -41,7 +42,7 @@ export async function PUT(request: Request) {
 
         const job = await JobPost.findByIdAndUpdate(
             id,
-            { title, description, requirements, isActive },
+            { title, description, requirements, vacancy, isActive },
             { new: true }
         );
         
