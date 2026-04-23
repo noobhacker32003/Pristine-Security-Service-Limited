@@ -188,7 +188,7 @@ export default function ContactPage() {
                                     {/* Google Maps Iframe */}
                                     <div className="w-full h-[200px] rounded-xl overflow-hidden shadow-lg border border-slate-700">
                                         <iframe
-                                            src="https://maps.google.com/maps?q=House%20No%3A%20136%2FB%2C%20Road%20No%3A%2022%2C%20Mohakhali%20New%20D.O.H.S%2C%20Dhaka%3A1206&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                                            src="https://maps.google.com/maps?q=23.7847557,90.3958206&t=&z=17&ie=UTF8&iwloc=&output=embed"
                                             width="100%"
                                             height="100%"
                                             style={{ border: 0 }}
@@ -232,7 +232,7 @@ export default function ContactPage() {
                                     {/* Google Maps Iframe */}
                                     <div className="w-full h-[200px] rounded-xl overflow-hidden shadow-lg border border-slate-700">
                                         <iframe
-                                            src="https://maps.google.com/maps?q=Madina%20Market%2C%20Muradpur%2C%20Panchlaish%2C%20Chittagong&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                                            src="https://maps.google.com/maps?q=23.8354004,90.4868112&t=&z=17&ie=UTF8&iwloc=&output=embed"
                                             width="100%"
                                             height="100%"
                                             style={{ border: 0 }}
