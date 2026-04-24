@@ -386,7 +386,7 @@ export default function GetJobPage() {
                                                     <input
                                                         {...register('applicantName', { required: true })}
                                                         className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-blue-600 focus:outline-none placeholder:text-slate-400 text-slate-800 transition-all"
-                                                        placeholder="John Doe"
+                                                        placeholder="Please Enter Your Name"
                                                     />
                                                     {errors.applicantName && <p className="text-xs text-red-500 mt-1">Name is required</p>}
                                                 </div>

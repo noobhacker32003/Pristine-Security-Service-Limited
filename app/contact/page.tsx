@@ -83,7 +83,7 @@ export default function ContactPage() {
                                         type="text"
                                         {...register('name', { required: 'Name is required' })}
                                         className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all bg-slate-50 focus:bg-white text-slate-900"
-                                        placeholder="John Doe"
+                                        placeholder="Please Enter Your Name"
                                     />
                                     {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
                                 </div>
@@ -98,7 +98,7 @@ export default function ContactPage() {
                                             pattern: { value: /^\S+@\S+$/i, message: 'Invalid email address' }
                                         })}
                                         className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all bg-slate-50 focus:bg-white text-slate-900"
-                                        placeholder="john@company.com"
+                                        placeholder="Please Enter Your Email Address"
                                     />
                                     {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
                                 </div>

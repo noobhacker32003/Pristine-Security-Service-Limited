@@ -116,6 +116,7 @@ export default function OfferPage() {
     const { data: offer, isLoading, isError } = useQuery<OfferData | null>({
         queryKey: queryKeys.offer,
         queryFn: () => apiFetch<OfferData | null>('/api/offer'),
+        staleTime: 60 * 1000, // Consider data fresh for 60 seconds
     });
 
     if (isLoading) return <OfferSkeleton />;
