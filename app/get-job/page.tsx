@@ -115,6 +115,7 @@ export default function GetJobPage() {
     const { data: jobs = [], isLoading: loading } = useQuery<JobPost[]>({
         queryKey: queryKeys.jobs,
         queryFn: () => apiFetch<JobPost[]>('/api/job'),
+        staleTime: 60 * 1000, // Consider data fresh for 60 seconds
     });
 
     const applyMutation = useMutation({
@@ -205,7 +206,7 @@ export default function GetJobPage() {
                         <div className="w-10 h-10 bg-amber-50 rounded-xl flex items-center justify-center mb-3">
                             <Shield className="w-5 h-5 text-amber-600" />
                         </div>
-                        <p className="text-2xl font-bold text-slate-900">15+</p>
+                        <p className="text-2xl font-bold text-slate-900">17+</p>
                         <p className="text-sm text-slate-500">Years Experience</p>
                     </div>
                 </motion.div>

@@ -268,7 +268,7 @@ export default function OfferPage() {
                             <Award className="w-6 h-6 text-amber-600" />
                         </div>
                         <h4 className="text-base font-bold text-slate-900 mb-1">Trusted Since 2009</h4>
-                        <p className="text-sm text-slate-500">Backed by years of experience protecting businesses nationwide.</p>
+                        <p className="text-sm text-slate-500">Backed by 17+ years of experience protecting businesses nationwide.</p>
                     </div>
                 </motion.div>
             </div>
