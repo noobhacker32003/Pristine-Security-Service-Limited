@@ -1,5 +1,4 @@
 "use client";
-
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle2, ArrowRight, Tag, Shield, Clock, Star, Sparkles, Phone, Award } from 'lucide-react';
 import Link from 'next/link';
@@ -11,7 +10,6 @@ type OfferData = {
     badgeText: string;
     benefits: string[];
 };
-
 /* ─────────────── Skeleton Components ─────────────── */
 function OfferSkeleton() {
     return (
