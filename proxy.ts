@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
     const adminSession = request.cookies.get('admin_session');
     const secret = process.env.ADMIN_SESSION_SECRET;
     const isAuthenticated = adminSession && secret && adminSession.value === secret;

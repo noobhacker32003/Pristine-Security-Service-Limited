@@ -80,8 +80,8 @@ export default function GetServicePage() {
                                     className="bg-green-50 border border-green-200 rounded-3xl p-8 md:p-12 flex flex-col items-center justify-center text-center shadow-sm relative overflow-hidden"
                                 >
                                     <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-green-400 via-green-500 to-green-400" />
-                                    
-                                    <motion.div 
+
+                                    <motion.div
                                         initial={{ scale: 0 }}
                                         animate={{ scale: 1 }}
                                         transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
@@ -127,7 +127,7 @@ export default function GetServicePage() {
                                                     type="text"
                                                     {...register('name', { required: 'Name is required' })}
                                                     className={`block w-full pl-10 pr-3 py-3 border ${errors.name ? 'border-red-300 ring-red-300' : 'border-slate-200'} rounded-xl bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all sm:text-sm placeholder-slate-600`}
-                                                    placeholder="John Doe"
+                                                    placeholder="Please Enter Your Name"
                                                 />
                                             </div>
                                             {errors.name && <p className="mt-1.5 text-sm text-red-600">{errors.name.message}</p>}
@@ -145,7 +145,7 @@ export default function GetServicePage() {
                                                 <input
                                                     id="phone"
                                                     type="tel"
-                                                    {...register('phone', { 
+                                                    {...register('phone', {
                                                         required: 'Phone number is required',
                                                         pattern: {
                                                             value: /^[0-9+\-\s()]*$/,
@@ -153,7 +153,7 @@ export default function GetServicePage() {
                                                         }
                                                     })}
                                                     className={`block w-full pl-10 pr-3 py-3 border ${errors.phone ? 'border-red-300 ring-red-300' : 'border-slate-200'} rounded-xl bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all sm:text-sm placeholder-slate-600`}
-                                                    placeholder="+1 (555) 000-0000"
+                                                    placeholder="Please Enter Your Phone Number"
                                                 />
                                             </div>
                                             {errors.phone && <p className="mt-1.5 text-sm text-red-600">{errors.phone.message}</p>}
@@ -171,7 +171,7 @@ export default function GetServicePage() {
                                                 <input
                                                     id="email"
                                                     type="email"
-                                                    {...register('email', { 
+                                                    {...register('email', {
                                                         required: 'Email is required',
                                                         pattern: {
                                                             value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
@@ -179,7 +179,7 @@ export default function GetServicePage() {
                                                         }
                                                     })}
                                                     className={`block w-full pl-10 pr-3 py-3 border ${errors.email ? 'border-red-300 ring-red-300' : 'border-slate-200'} rounded-xl bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all sm:text-sm placeholder-slate-600`}
-                                                    placeholder="john@example.com"
+                                                    placeholder="Please Enter Your Email Address"
                                                 />
                                             </div>
                                             {errors.email && <p className="mt-1.5 text-sm text-red-600">{errors.email.message}</p>}
@@ -218,7 +218,7 @@ export default function GetServicePage() {
                                             <textarea
                                                 id="details"
                                                 rows={5}
-                                                {...register('details', { 
+                                                {...register('details', {
                                                     required: 'Please provide some details about your security needs',
                                                     minLength: {
                                                         value: 10,
