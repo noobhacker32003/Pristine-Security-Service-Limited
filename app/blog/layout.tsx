@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     title: "আব্দুল গাফফারের সংগ্রামী ও প্রেরণাদায়ক গল্প",
     description:
       "Pristine Security Service Limited এর একজন সাহসী কর্মীর জীবন বদলানোর অনুপ্রেরণামূলক কাহিনী।",
-    images: ["/assets/story.jpeg"],
+    images: ["/assets/story1.png"],
   },
 };
 

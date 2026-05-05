@@ -32,7 +32,7 @@ export default function BlogPage() {
         >
           {/* Portrait image with natural aspect ratio (549×1024) */}
           <Image
-            src="/assets/story.jpeg"
+            src="/assets/story1.png"
             alt="আব্দুল গাফফারের প্রেরণাদায়ক গল্প"
             width={549}
             height={1024}
