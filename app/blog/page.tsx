@@ -64,7 +64,7 @@ export default function BlogPage() {
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-cyan-200">
                       সংগ্রামী ও প্রেরণাদায়ক গল্প
                     </span>{" "}
-                    🎖️🎖️
+
                   </h1>
                 </div>
               </motion.div>
