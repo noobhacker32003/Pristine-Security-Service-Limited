@@ -33,6 +33,7 @@ export default function Navbar() {
         { name: 'Offer', path: '/offer', badge: 'Promo', badgeColor: 'bg-amber-500' },
         { name: 'Get Job', path: '/get-job', badge: 'Hiring', badgeColor: 'bg-green-500' },
         { name: 'Contact Us', path: '/contact' },
+        { name: 'Blog', path: '/blog', badgeColor: 'bg-blue-500' },
     ];
 
     return (
@@ -109,7 +110,7 @@ export default function Navbar() {
                             className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-full font-medium transition-all text-sm shadow-sm hover:shadow-md flex items-center gap-2"
                         >
                             <ClipboardSignature className="w-4 h-4" />
-                            Get Service
+                            Get service
                         </Link>
 
                         <Link
@@ -171,7 +172,7 @@ export default function Navbar() {
                                     className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl font-medium transition-colors w-full shadow-sm"
                                 >
                                     <ClipboardSignature className="w-5 h-5" />
-                                    Get Service
+                                    Get service
                                 </Link>
                                 <Link
                                     href="/report"

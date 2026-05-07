@@ -35,5 +35,7 @@ export async function apiMutate<T>(
 export const queryKeys = {
     jobs: ['jobs'] as const,
     offer: ['offer'] as const,
+    services: ['services'] as const,
     adminOffer: ['admin', 'offer'] as const,
+    adminServices: ['admin', 'services'] as const,
 };

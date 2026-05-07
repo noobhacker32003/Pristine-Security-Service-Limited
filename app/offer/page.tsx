@@ -134,23 +134,23 @@ export default function OfferPage() {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+        <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 pt-28 pb-16 px-4 sm:px-6 lg:px-8">
             <div className="max-w-5xl mx-auto">
                 {/* Page Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
-                    className="text-center mb-14"
+                    className="text-center mb-10"
                 >
                     <span className="inline-flex items-center gap-2 bg-amber-50 text-amber-700 px-5 py-2 rounded-full text-sm font-bold tracking-wide border border-amber-200 mb-6">
                         <Sparkles className="w-4 h-4" />
                         Limited Time Promotion
                     </span>
-                    <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4">
+                    <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3">
                         Exclusive <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">Security</span> Offer
                     </h1>
-                    <p className="text-lg text-slate-500 max-w-2xl mx-auto">
+                    <p className="text-base text-slate-500 max-w-2xl mx-auto">
                         Take advantage of this special promotion from Pristine Security Service Limited.
                     </p>
                 </motion.div>
@@ -160,7 +160,7 @@ export default function OfferPage() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.1 }}
-                    className="bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100 relative"
+                    className="bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-100 relative"
                 >
                     {/* Ribbon */}
                     <div className="absolute top-7 -right-12 rotate-45 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold py-2 px-14 shadow-lg text-sm tracking-wider uppercase z-10">
@@ -170,12 +170,12 @@ export default function OfferPage() {
                     {/* Top Gradient */}
                     <div className="h-2 w-full bg-gradient-to-r from-blue-600 via-blue-500 to-amber-400" />
 
-                    <div className="p-8 sm:p-12 md:p-16">
+                    <div className="p-6 sm:p-8 md:p-10 lg:p-12">
                         <motion.div
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ delay: 0.2 }}
-                            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 text-blue-700 font-semibold text-sm mb-8 border border-blue-100"
+                            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 text-blue-700 font-semibold text-sm mb-5 border border-blue-100"
                         >
                             <Shield className="w-4 h-4" />
                             Special Promotion
@@ -185,7 +185,7 @@ export default function OfferPage() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.3 }}
-                            className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 leading-tight mb-10"
+                            className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 leading-tight mb-8"
                         >
                             {offer.title}
                         </motion.h2>
@@ -195,19 +195,19 @@ export default function OfferPage() {
                             variants={containerVariants}
                             initial="hidden"
                             animate="visible"
-                            className="space-y-4 mb-12"
+                            className="space-y-2.5 mb-8"
                         >
-                            <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-6">What&apos;s Included</h3>
+                            <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">What&apos;s Included</h3>
                             {offer.benefits.map((benefit, index) => (
                                 <motion.div
                                     key={index}
                                     variants={itemVariants}
-                                    className="flex items-start gap-4 p-3 rounded-xl hover:bg-slate-50 transition-colors group"
+                                    className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors group"
                                 >
                                     <div className="flex-shrink-0 bg-green-100 p-1.5 rounded-full mt-0.5 group-hover:bg-green-200 transition-colors">
                                         <CheckCircle2 className="w-5 h-5 text-green-600" />
                                     </div>
-                                    <p className="text-lg text-slate-700 font-medium">{benefit}</p>
+                                    <p className="text-base text-slate-700 font-medium">{benefit}</p>
                                 </motion.div>
                             ))}
                         </motion.div>
@@ -237,7 +237,7 @@ export default function OfferPage() {
                     </div>
 
                     {/* Bottom Gradient Bar */}
-                    <div className="h-3 w-full bg-gradient-to-r from-blue-600 via-blue-400 to-amber-400" />
+                    <div className="h-2 w-full bg-gradient-to-r from-blue-600 via-blue-400 to-amber-400" />
                 </motion.div>
 
                 {/* Feature Cards */}
@@ -245,7 +245,7 @@ export default function OfferPage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.7 }}
-                    className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10"
+                    className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-8"
                 >
                     <div className="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-md transition-shadow group">
                         <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-blue-100 transition-colors">

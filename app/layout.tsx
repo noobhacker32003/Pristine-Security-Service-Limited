@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import QueryProvider from "@/providers/QueryProvider";
 import "./globals.css";
 
@@ -18,11 +19,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.pristinesecurity.org'),
   title: {
-    default: "Pristine Security Service Limited | Elite Security Bangladesh",
+    default: "Pristine Security Service Limited | Security Company in Dhaka",
     template: "%s | Pristine Security Service Limited",
   },
-  description: "Pristine Security Service Limited provides elite, professional security solutions in Bangladesh including uniformed guarding, corporate security, event security, and physical protection.",
-  keywords: ["security service Bangladesh", "security guard company Dhaka", "corporate security Bangladesh", "event security", "building security", "Pristine Security", "uniformed guarding", "physical protection"],
+  description: "Professional security guard services, CCTV solutions, and VIP protection across Bangladesh. Trusted and reliable security provider since 2009 with 3500+ trained personnel.",
+  keywords: ["security company in Dhaka", "security guard service Bangladesh", "industrial security Dhaka", "CCTV installation Bangladesh", "corporate security Bangladesh", "event security", "building security", "Pristine Security", "uniformed guarding", "physical protection"],
   icons: {
     icon: "/assets/logo1.png",
     shortcut: "/assets/logo1.png",
@@ -98,6 +99,7 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
+          <WhatsAppButton />
         </QueryProvider>
       </body>
     </html>
